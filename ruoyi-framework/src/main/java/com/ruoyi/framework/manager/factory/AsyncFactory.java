@@ -9,10 +9,10 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ip.AddressUtils;
 import com.ruoyi.common.utils.ip.IpUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
-import com.ruoyi.system.domain.SysLogininfor;
-import com.ruoyi.system.domain.SysOperLog;
-import com.ruoyi.system.service.ISysLogininforService;
-import com.ruoyi.system.service.ISysOperLogService;
+import com.ruoyi.talents.domain.SysLogininfor;
+import com.ruoyi.talents.domain.SysOperLog;
+import com.ruoyi.talents.service.ISysLogininforService;
+import com.ruoyi.talents.service.ISysOperLogService;
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**

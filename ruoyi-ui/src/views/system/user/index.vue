@@ -90,7 +90,7 @@
               icon="el-icon-plus"
               size="mini"
               @click="handleAdd"
-              v-hasPermi="['system:user:add']"
+              v-hasPermi="['talents:user:add']"
             >新增</el-button>
           </el-col>
           <el-col :span="1.5">
@@ -101,7 +101,7 @@
               size="mini"
               :disabled="single"
               @click="handleUpdate"
-              v-hasPermi="['system:user:edit']"
+              v-hasPermi="['talents:user:edit']"
             >修改</el-button>
           </el-col>
           <el-col :span="1.5">
@@ -112,7 +112,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleDelete"
-              v-hasPermi="['system:user:remove']"
+              v-hasPermi="['talents:user:remove']"
             >删除</el-button>
           </el-col>
           <el-col :span="1.5">
@@ -122,7 +122,7 @@
               icon="el-icon-upload2"
               size="mini"
               @click="handleImport"
-              v-hasPermi="['system:user:import']"
+              v-hasPermi="['talents:user:import']"
             >导入</el-button>
           </el-col>
           <el-col :span="1.5">
@@ -133,7 +133,7 @@
               size="mini"
               :loading="exportLoading"
               @click="handleExport"
-              v-hasPermi="['system:user:export']"
+              v-hasPermi="['talents:user:export']"
             >导出</el-button>
           </el-col>
           <right-toolbar :showSearch.sync="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
@@ -173,7 +173,7 @@
                 type="text"
                 icon="el-icon-edit"
                 @click="handleUpdate(scope.row)"
-                v-hasPermi="['system:user:edit']"
+                v-hasPermi="['talents:user:edit']"
               >修改</el-button>
               <el-button
                 v-if="scope.row.userId !== 1"
@@ -181,14 +181,14 @@
                 type="text"
                 icon="el-icon-delete"
                 @click="handleDelete(scope.row)"
-                v-hasPermi="['system:user:remove']"
+                v-hasPermi="['talents:user:remove']"
               >删除</el-button>
               <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-key"
                 @click="handleResetPwd(scope.row)"
-                v-hasPermi="['system:user:resetPwd']"
+                v-hasPermi="['talents:user:resetPwd']"
               >重置</el-button>
             </template>
           </el-table-column>
@@ -344,9 +344,9 @@
 </template>
 
 <script>
-import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate } from "@/api/system/user";
+import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate } from "@/api/talents/user";
 import { getToken } from "@/utils/auth";
-import { treeselect } from "@/api/system/dept";
+import { treeselect } from "@/api/talents/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
@@ -410,7 +410,7 @@ export default {
         // 设置上传的请求头部
         headers: { Authorization: "Bearer " + getToken() },
         // 上传的地址
-        url: process.env.VUE_APP_BASE_API + "/system/user/importData"
+        url: process.env.VUE_APP_BASE_API + "/talents/user/importData"
       },
       // 查询参数
       queryParams: {

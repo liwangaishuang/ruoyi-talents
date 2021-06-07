@@ -24,7 +24,7 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.service.TokenService;
-import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.talents.service.ISysMenuService;
 
 /**
  * 菜单信息

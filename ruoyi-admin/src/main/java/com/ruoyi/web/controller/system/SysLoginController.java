@@ -17,7 +17,7 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
 import com.ruoyi.framework.web.service.TokenService;
-import com.ruoyi.system.service.ISysMenuService;
+import com.ruoyi.talents.service.ISysMenuService;
 
 /**
  * 登录验证

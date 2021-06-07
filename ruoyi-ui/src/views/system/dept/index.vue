@@ -34,7 +34,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:dept:add']"
+          v-hasPermi="['talents:dept:add']"
         >新增</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -62,14 +62,14 @@
             type="text" 
             icon="el-icon-edit" 
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:dept:edit']"
+            v-hasPermi="['talents:dept:edit']"
           >修改</el-button>
           <el-button 
             size="mini" 
             type="text" 
             icon="el-icon-plus" 
             @click="handleAdd(scope.row)"
-            v-hasPermi="['system:dept:add']"
+            v-hasPermi="['talents:dept:add']"
           >新增</el-button>
           <el-button
             v-if="scope.row.parentId != 0"
@@ -77,7 +77,7 @@
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:dept:remove']"
+            v-hasPermi="['talents:dept:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/system/dept";
+import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/api/talents/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 

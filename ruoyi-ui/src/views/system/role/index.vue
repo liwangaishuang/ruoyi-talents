@@ -63,7 +63,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:role:add']"
+          v-hasPermi="['talents:role:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -74,7 +74,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:role:edit']"
+          v-hasPermi="['talents:role:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -85,7 +85,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:role:remove']"
+          v-hasPermi="['talents:role:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -96,7 +96,7 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['system:role:export']"
+          v-hasPermi="['talents:role:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -130,21 +130,21 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:role:edit']"
+            v-hasPermi="['talents:role:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-circle-check"
             @click="handleDataScope(scope.row)"
-            v-hasPermi="['system:role:edit']"
+            v-hasPermi="['talents:role:edit']"
           >数据权限</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:role:remove']"
+            v-hasPermi="['talents:role:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -249,9 +249,9 @@
 </template>
 
 <script>
-import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from "@/api/system/role";
-import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/api/system/menu";
-import { treeselect as deptTreeselect, roleDeptTreeselect } from "@/api/system/dept";
+import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from "@/api/talents/role";
+import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/api/talents/menu";
+import { treeselect as deptTreeselect, roleDeptTreeselect } from "@/api/talents/dept";
 
 export default {
   name: "Role",

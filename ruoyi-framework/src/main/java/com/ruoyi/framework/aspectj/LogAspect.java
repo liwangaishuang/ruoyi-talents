@@ -31,7 +31,7 @@ import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.framework.web.service.TokenService;
-import com.ruoyi.system.domain.SysOperLog;
+import com.ruoyi.talents.domain.SysOperLog;
 
 /**
  * 操作日志记录处理

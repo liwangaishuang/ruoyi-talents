@@ -44,7 +44,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:dict:add']"
+          v-hasPermi="['talents:dict:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -55,7 +55,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:dict:edit']"
+          v-hasPermi="['talents:dict:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -66,7 +66,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:dict:remove']"
+          v-hasPermi="['talents:dict:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -77,7 +77,7 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['system:dict:export']"
+          v-hasPermi="['talents:dict:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -103,14 +103,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:dict:edit']"
+            v-hasPermi="['talents:dict:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:dict:remove']"
+            v-hasPermi="['talents:dict:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -161,8 +161,8 @@
 </template>
 
 <script>
-import { listData, getData, delData, addData, updateData, exportData } from "@/api/system/dict/data";
-import { listType, getType } from "@/api/system/dict/type";
+import { listData, getData, delData, addData, updateData, exportData } from "@/api/talents/dict/data";
+import { listType, getType } from "@/api/talents/dict/type";
 
 export default {
   name: "Data",
