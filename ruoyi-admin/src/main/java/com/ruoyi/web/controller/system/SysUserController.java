@@ -189,6 +189,18 @@ public class SysUserController extends BaseController
         user.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(userService.resetPwd(user));
     }
+    /**
+     * 登录端忘记密码
+     */
+    @Log(title = "登录端忘记密码", businessType = BusinessType.UPDATE)
+    @PutMapping("/resetPwd2")
+    public AjaxResult resetPwd2(@RequestBody SysUser user)
+    {
+        userService.checkUserAllowed(user);
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        user.setUpdateBy("");
+        return toAjax(userService.resetPwd(user));
+    }
 
     /**
      * 状态修改
