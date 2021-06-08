@@ -50,10 +50,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="resultsOrPatents"    column="results_or_patents"    />
         <result property="honorsOrTitles"    column="honors_or_titles"    />
         <result property="resumeSite"    column="resume_site"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
     </resultMap>
 
     <sql id="selectUserVo">
-        select id, user_name, password, user_id_number, user_sex, birth_date, age, phone_number, email, office_phone, home_telephone, nationality, nation, politics_status, postal_code, professional, dwell_region, dwell_site, specialty_type, job_nature, company_name, company_type, second_level_department, position, company_region, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, is_academician, is_doctoral_supervisor, language, major_academy, degree, main_industry, else_industry, work_content, main_contribution, rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site from user
+        select id, user_name, password, user_id_number, user_sex, birth_date, age, phone_number, email, office_phone, home_telephone, nationality, nation, politics_status, postal_code, professional, dwell_region, dwell_site, specialty_type, job_nature, company_name, company_type, second_level_department, position, company_region, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, is_academician, is_doctoral_supervisor, language, major_academy, degree, main_industry, else_industry, work_content, main_contribution, rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site,create_time,update_time from user
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
@@ -103,6 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="createTime != null"> and create_time = #{createTime}</if>
+            <if test="updateTime != null"> and update_time = #{updateTime}</if>
         </where>
     </select>
     
@@ -159,6 +163,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="resultsOrPatents != null">results_or_patents,</if>
             <if test="honorsOrTitles != null">honors_or_titles,</if>
             <if test="resumeSite != null">resume_site,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -206,6 +212,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="resultsOrPatents != null">#{resultsOrPatents},</if>
             <if test="honorsOrTitles != null">#{honorsOrTitles},</if>
             <if test="resumeSite != null">#{resumeSite},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
          </trim>
     </insert>
 
@@ -256,6 +264,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="resultsOrPatents != null">results_or_patents = #{resultsOrPatents},</if>
             <if test="honorsOrTitles != null">honors_or_titles = #{honorsOrTitles},</if>
             <if test="resumeSite != null">resume_site = #{resumeSite},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
         </trim>
         where id = #{id}
     </update>
