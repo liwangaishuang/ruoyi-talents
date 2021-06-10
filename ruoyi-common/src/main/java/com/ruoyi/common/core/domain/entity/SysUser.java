@@ -92,6 +92,34 @@ public class SysUser extends BaseEntity
     /** 岗位组 */
     private Long[] postIds;
 
+    /** 专家姓名 */
+    @Excel(name = "专家姓名")
+    private String expertsName;
+
+    /** 证件类型 */
+    @Excel(name = "证件类型")
+    private String idNumberType;
+
+    /** 证件号码 */
+    @Excel(name = "证件号码")
+    private String userIdNumber;
+
+    /** 单位名称 */
+    @Excel(name = "单位名称")
+    private String companyName;
+
+    /** 单位类型 */
+    @Excel(name = "单位类型")
+    private String companyType;
+
+    /** 单位地区 */
+    @Excel(name = "单位地区")
+    private String companyRegion;
+
+    /** 单位地址 */
+    @Excel(name = "单位地址")
+    private String companySite;
+
     public SysUser()
     {
 
@@ -300,6 +328,69 @@ public class SysUser extends BaseEntity
         this.postIds = postIds;
     }
 
+    public void setExpertsName(String expertsName)
+    {
+        this.expertsName = expertsName;
+    }
+    public String getExpertsName()
+    {
+        return expertsName;
+    }
+
+    public void setIdNumberType(String idNumberType)
+    {
+        this.idNumberType = idNumberType;
+    }
+    public String getIdNumberType()
+    {
+        return idNumberType;
+    }
+
+    public void setUserIdNumber(String userIdNumber)
+    {
+        this.userIdNumber = userIdNumber;
+    }
+    public String getUserIdNumber()
+    {
+        return userIdNumber;
+    }
+
+    public void setCompanyName(String companyName)
+    {
+        this.companyName = companyName;
+    }
+    public String getCompanyName()
+    {
+        return companyName;
+    }
+
+    public void setCompanyType(String companyType)
+    {
+        this.companyType = companyType;
+    }
+    public String getCompanyType()
+    {
+        return companyType;
+    }
+
+    public void setCompanyRegion(String companyRegion)
+    {
+        this.companyRegion = companyRegion;
+    }
+    public String getCompanyRegion()
+    {
+        return companyRegion;
+    }
+
+    public void setCompanySite(String companySite)
+    {
+        this.companySite = companySite;
+    }
+    public String getCompanySite()
+    {
+        return companySite;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -323,6 +414,13 @@ public class SysUser extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
             .append("dept", getDept())
+            .append("expertsName", getExpertsName())
+            .append("idNumberType", getIdNumberType())
+            .append("userIdNumber", getUserIdNumber())
+            .append("companyName", getCompanyName())
+            .append("companyType", getCompanyType())
+            .append("companyRegion", getCompanyRegion())
+            .append("companySite", getCompanySite())
             .toString();
     }
 }

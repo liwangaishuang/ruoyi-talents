@@ -23,6 +23,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy"     column="update_by"    />
 		<result property="updateTime"   column="update_time"  />
 		<result property="remark"       column="remark"       />
+        <result property="expertsName"    column="experts_name"    />
+        <result property="idNumberType"    column="id_number_type"    />
+        <result property="userIdNumber"    column="user_id_number"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyType"    column="company_type"    />
+        <result property="companyRegion"    column="company_region"    />
+        <result property="companySite"    column="company_site"    />
 		<association property="dept"    column="dept_id" javaType="SysDept" resultMap="deptResult" />
 		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
 	</resultMap>
@@ -46,7 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectUserVo">
-        select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, 
+        select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
+        u.experts_name,u.id_number_type,u.user_id_number,u.company_name,u.company_type,u.company_region,u.company_site,
         d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status,
         r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
         from sys_user u
@@ -56,7 +64,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
     <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
-		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader,
+        u.experts_name,u.id_number_type,u.user_id_number,u.company_name,u.company_type,u.company_region,u.company_site
+        from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.del_flag = '0'
 		<if test="userName != null and userName != ''">
@@ -77,6 +87,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="deptId != null and deptId != 0">
 			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE find_in_set(#{deptId}, ancestors) ))
 		</if>
+        <if test="expertsName != null  and expertsName != ''">
+            and experts_name like concat('%', #{expertsName}, '%')
+        </if>
+        <if test="idNumberType != null  and idNumberType != ''">
+            and id_number_type = #{idNumberType}
+        </if>
+        <if test="userIdNumber != null  and userIdNumber != ''">
+            and user_id_number = #{userIdNumber}
+        </if>
+        <if test="companyName != null  and companyName != ''">
+            and company_name like concat('%', #{companyName}, '%')
+        </if>
+        <if test="companyType != null  and companyType != ''">
+            and company_type = #{companyType}
+        </if>
+        <if test="companyRegion != null  and companyRegion != ''">
+            and company_region = #{companyRegion}
+        </if>
+        <if test="companySite != null  and companySite != ''">
+            and company_site = #{companySite}
+        </if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
@@ -117,6 +148,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			<if test="remark != null and remark != ''">remark,</if>
+            <if test="expertsName != null">experts_name,</if>
+            <if test="idNumberType != null">id_number_type,</if>
+            <if test="userIdNumber != null">user_id_number,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyType != null">company_type,</if>
+            <if test="companyRegion != null">company_region,</if>
+            <if test="companySite != null">company_site,</if>
  			create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -131,6 +169,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
+            <if test="expertsName != null">#{expertsName},</if>
+            <if test="idNumberType != null">#{idNumberType},</if>
+            <if test="userIdNumber != null">#{userIdNumber},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyType != null">#{companyType},</if>
+            <if test="companyRegion != null">#{companyRegion},</if>
+            <if test="companySite != null">#{companySite},</if>
  			sysdate()
  		)
 	</insert>
@@ -151,6 +196,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null">remark = #{remark},</if>
+            <if test="expertsName != null">experts_name = #{expertsName},</if>
+            <if test="idNumberType != null">id_number_type = #{idNumberType},</if>
+            <if test="userIdNumber != null">user_id_number = #{userIdNumber},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyType != null">company_type = #{companyType},</if>
+            <if test="companyRegion != null">company_region = #{companyRegion},</if>
+            <if test="companySite != null">company_site = #{companySite},</if>
  			update_time = sysdate()
  		</set>
  		where user_id = #{userId}
