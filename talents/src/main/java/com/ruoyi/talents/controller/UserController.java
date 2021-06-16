@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2021-06-11
  */
 @RestController
-@RequestMapping("/talents/user")
+@RequestMapping("/talents/self")
 public class UserController extends BaseController
 {
     @Autowired
@@ -36,7 +36,7 @@ public class UserController extends BaseController
     /**
      * 查询用户列表
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:list')")
+    @PreAuthorize("@ss.hasPermi('talents:self:list')")
     @GetMapping("/list")
     public TableDataInfo list(User user)
     {
@@ -48,7 +48,7 @@ public class UserController extends BaseController
     /**
      * 导出用户列表
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:export')")
+    @PreAuthorize("@ss.hasPermi('talents:self:export')")
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(User user)
@@ -61,7 +61,7 @@ public class UserController extends BaseController
     /**
      * 获取用户详细信息
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:query')")
+    @PreAuthorize("@ss.hasPermi('talents:self:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
@@ -71,18 +71,19 @@ public class UserController extends BaseController
     /**
      * 新增用户
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:add')")
+    @PreAuthorize("@ss.hasPermi('talents:self:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody User user)
     {
+        System.out.println(user);
         return toAjax(userService.insertUser(user));
     }
 
     /**
      * 修改用户
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:edit')")
+    @PreAuthorize("@ss.hasPermi('talents:self:edit')")
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody User user)
@@ -93,7 +94,7 @@ public class UserController extends BaseController
     /**
      * 删除用户
      */
-    @PreAuthorize("@ss.hasPermi('talents:user:remove')")
+    @PreAuthorize("@ss.hasPermi('talents:self:remove')")
     @Log(title = "用户", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
