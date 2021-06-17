@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2021-06-11
  */
 @RestController
-@RequestMapping("/talents/self")
+@RequestMapping("/declare/specialist")
 public class UserController extends BaseController
 {
     @Autowired
