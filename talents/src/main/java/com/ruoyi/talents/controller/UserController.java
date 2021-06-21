@@ -1,8 +1,12 @@
 package com.ruoyi.talents.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.ServletUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.ruoyi.framework.web.service.TokenService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,6 +37,8 @@ public class UserController extends BaseController
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private TokenService tokenService;
     /**
      * 查询用户列表
      */
@@ -69,6 +75,17 @@ public class UserController extends BaseController
     }
 
     /**
+     * 获取当前用户详细信息
+     */
+    @GetMapping
+    public AjaxResult getNowInfo() {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        String id = loginUser.getUser().getUserId()+"";
+        return AjaxResult.success(userService.selectUserById2(id));
+    }
+
+
+    /**
      * 新增用户
      */
     @PreAuthorize("@ss.hasPermi('talents:self:add')")
@@ -76,7 +93,9 @@ public class UserController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody User user)
     {
-        System.out.println(user);
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        String id = loginUser.getUser().getUserId()+"";
+        user.setUserId(id);
         return toAjax(userService.insertUser(user));
     }
 

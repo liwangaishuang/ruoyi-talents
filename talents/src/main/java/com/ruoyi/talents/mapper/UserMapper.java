@@ -19,6 +19,8 @@ public interface UserMapper
      */
     public User selectUserById(String id);
 
+    public User selectUserById2(String id);
+
     /**
      * 查询用户列表
      *

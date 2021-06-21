@@ -32,6 +32,12 @@ public class UserServiceImpl implements IUserService
         return userMapper.selectUserById(id);
     }
 
+    @Override
+    public User selectUserById2(String id)
+    {
+        return userMapper.selectUserById2(id);
+    }
+
     /**
      * 查询用户列表
      *

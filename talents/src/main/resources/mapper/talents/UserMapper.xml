@@ -137,6 +137,11 @@
         where id = #{id}
     </select>
 
+    <select id="selectUserById2" parameterType="String" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        where user_id = #{id}
+    </select>
+
     <insert id="insertUser" parameterType="User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
