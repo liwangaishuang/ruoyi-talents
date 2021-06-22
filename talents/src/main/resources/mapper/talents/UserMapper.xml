@@ -140,6 +140,7 @@
     <select id="selectUserById2" parameterType="String" resultMap="UserResult">
         <include refid="selectUserVo"/>
         where user_id = #{id}
+        order by create_time desc limit 1
     </select>
 
     <insert id="insertUser" parameterType="User">
