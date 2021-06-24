@@ -139,14 +139,12 @@
 
     <select id="selectUserById2" parameterType="String" resultMap="UserResult">
         <include refid="selectUserVo"/>
-        where user_id = #{id}
-        order by create_time desc limit 1
+        where id = #{id}
     </select>
 
-    <insert id="insertUser" parameterType="User">
+    <insert id="insertUser" parameterType="User"  useGeneratedKeys="true" keyProperty="id">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="userId != null">user_id,</if>
             <if test="userName != null">user_name,</if>
             <if test="portrait != null">portrait,</if>
@@ -207,7 +205,6 @@
             <if test="status != null">status,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
             <if test="userName != null">#{userName},</if>
             <if test="portrait != null">#{portrait},</if>

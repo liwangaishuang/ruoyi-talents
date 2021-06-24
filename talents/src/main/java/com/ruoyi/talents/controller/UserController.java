@@ -89,12 +89,13 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody User user)
+    public int add(@RequestBody User user)
     {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         String id = loginUser.getUser().getUserId()+"";
         user.setUserId(id);
-        return toAjax(userService.insertUser(user));
+        userService.insertUser(user);
+        return user.getId();
     }
 
     /**

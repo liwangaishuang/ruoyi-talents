@@ -18,7 +18,7 @@ public class User extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private String id;
+    private int id;
 
     /** 用户表id */
     @Excel(name = "用户表id")
@@ -245,12 +245,12 @@ public class User extends BaseEntity
     @Excel(name = "申报状态(0:暂存 1:未审核 2:已审核 3:已删除)")
     private String status;
 
-    public void setId(String id)
+    public void setId(int id)
     {
         this.id = id;
     }
 
-    public String getId()
+    public int getId()
     {
         return id;
     }
