@@ -77,10 +77,8 @@ public class UserController extends BaseController
     /**
      * 获取当前用户详细信息
      */
-    @GetMapping("/now")
-    public AjaxResult getNowInfo() {
-        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
-        String id= loginUser.getUser().getUserId()+"";
+    @GetMapping("/now/{id}")
+    public AjaxResult getNowInfo(@PathVariable("id") String id) {
         return AjaxResult.success(userService.selectUserById2(id));
     }
 
