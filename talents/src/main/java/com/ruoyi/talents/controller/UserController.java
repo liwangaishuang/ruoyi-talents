@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.talents.utils.WordUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.framework.web.service.TokenService;
@@ -23,6 +24,8 @@ import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.service.IUserService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户Controller
@@ -118,5 +121,18 @@ public class UserController extends BaseController
     public AjaxResult remove(@PathVariable String[] ids)
     {
         return toAjax(userService.deleteUserByIds(ids));
+    }
+
+
+
+    /**
+     * 导出用户word
+     */
+    @GetMapping("/exportWord")
+    //@PreAuthorize("@ss.hasPermi('talents:self:exportWord')")
+    public AjaxResult exportWord(HttpServletResponse response, User user)
+    {
+        User user1 = userService.selectUserById(user.getId()+"");
+        return WordUtil.exportWord(user1,response);
     }
 }
