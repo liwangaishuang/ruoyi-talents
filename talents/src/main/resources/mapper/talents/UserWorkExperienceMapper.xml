@@ -12,11 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="secondLevelDepartment"    column="second_level_department"    />
         <result property="position"    column="position"    />
         <result property="workingTime"    column="working_time"    />
+        <result property="endWorkingTime"    column="end_working_time"    />
         <result property="companySite"    column="company_site"    />
     </resultMap>
 
     <sql id="selectUserWorkExperienceVo">
-        select id, user_id, company_name, company_type, second_level_department, position, working_time, company_site from user_work_experience
+        select id, user_id, company_name, company_type, second_level_department, position, working_time, end_working_time, company_site from user_work_experience
     </sql>
 
     <select id="selectUserWorkExperienceList" parameterType="UserWorkExperience" resultMap="UserWorkExperienceResult">
@@ -28,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="secondLevelDepartment != null  and secondLevelDepartment != ''"> and second_level_department = #{secondLevelDepartment}</if>
             <if test="position != null  and position != ''"> and position = #{position}</if>
             <if test="workingTime != null "> and working_time = #{workingTime}</if>
+            <if test="endWorkingTime != null "> and end_working_time = #{endWorkingTime}</if>
             <if test="companySite != null  and companySite != ''"> and company_site = #{companySite}</if>
         </where>
     </select>
@@ -46,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="secondLevelDepartment != null">second_level_department,</if>
             <if test="position != null">position,</if>
             <if test="workingTime != null">working_time,</if>
+            <if test="endWorkingTime != null">end_working_time,</if>
             <if test="companySite != null">company_site,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -55,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="secondLevelDepartment != null">#{secondLevelDepartment},</if>
             <if test="position != null">#{position},</if>
             <if test="workingTime != null">#{workingTime},</if>
+            <if test="endWorkingTime != null">#{endWorkingTime},</if>
             <if test="companySite != null">#{companySite},</if>
          </trim>
     </insert>
@@ -68,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="secondLevelDepartment != null">second_level_department = #{secondLevelDepartment},</if>
             <if test="position != null">position = #{position},</if>
             <if test="workingTime != null">working_time = #{workingTime},</if>
+            <if test="endWorkingTime != null">end_working_time = #{endWorkingTime},</if>
             <if test="companySite != null">company_site = #{companySite},</if>
         </trim>
         where id = #{id}

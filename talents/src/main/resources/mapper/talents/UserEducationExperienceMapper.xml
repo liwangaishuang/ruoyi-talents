@@ -12,11 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="degree"    column="degree"    />
         <result property="major"    column="major"    />
         <result property="schoolTime"    column="school_time"    />
+        <result property="endSchoolTime"    column="end_school_time"    />
         <result property="schoolSite"    column="school_site"    />
     </resultMap>
 
     <sql id="selectUserEducationExperienceVo">
-        select id, user_id, school_name, education, degree, major, school_time, school_site from user_education_experience
+        select id, user_id, school_name, education, degree, major, school_time, end_school_time, school_site from user_education_experience
     </sql>
 
     <select id="selectUserEducationExperienceList" parameterType="UserEducationExperience" resultMap="UserEducationExperienceResult">
@@ -28,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="degree != null  and degree != ''"> and degree = #{degree}</if>
             <if test="major != null  and major != ''"> and major = #{major}</if>
             <if test="schoolTime != null "> and school_time = #{schoolTime}</if>
+            <if test="endSchoolTime != null "> and end_school_time = #{endSchoolTime}</if>
             <if test="schoolSite != null  and schoolSite != ''"> and school_site = #{schoolSite}</if>
         </where>
     </select>
@@ -46,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="degree != null">degree,</if>
             <if test="major != null">major,</if>
             <if test="schoolTime != null">school_time,</if>
+            <if test="endSchoolTime != null">end_school_time,</if>
             <if test="schoolSite != null">school_site,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -55,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="degree != null">#{degree},</if>
             <if test="major != null">#{major},</if>
             <if test="schoolTime != null">#{schoolTime},</if>
+            <if test="endSchoolTime != null">#{endSchoolTime},</if>
             <if test="schoolSite != null">#{schoolSite},</if>
          </trim>
     </insert>
@@ -68,6 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="degree != null">degree = #{degree},</if>
             <if test="major != null">major = #{major},</if>
             <if test="schoolTime != null">school_time = #{schoolTime},</if>
+            <if test="endSchoolTime != null">end_school_time = #{endSchoolTime},</if>
             <if test="schoolSite != null">school_site = #{schoolSite},</if>
         </trim>
         where id = #{id}

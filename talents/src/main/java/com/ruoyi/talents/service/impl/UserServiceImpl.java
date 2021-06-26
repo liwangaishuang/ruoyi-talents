@@ -2,6 +2,12 @@ package com.ruoyi.talents.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.talents.domain.UserEducationExperience;
+import com.ruoyi.talents.domain.UserOccupational;
+import com.ruoyi.talents.domain.UserWorkExperience;
+import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
+import com.ruoyi.talents.mapper.UserOccupationalMapper;
+import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.talents.mapper.UserMapper;
@@ -19,6 +25,13 @@ public class UserServiceImpl implements IUserService
 {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserEducationExperienceMapper educationExperienceMapper;
+    @Autowired
+    private UserOccupationalMapper occupationalMapper;
+    @Autowired
+    private UserWorkExperienceMapper workExperienceMapper;
+
 
     /**
      * 查询用户
@@ -59,6 +72,11 @@ public class UserServiceImpl implements IUserService
     @Override
     public int insertUser(User user)
     {
+        /**先插入user相关表*/
+        educationExperienceMapper.insertUserEducationExperience(user.getExperience());
+        workExperienceMapper.insertUserWorkExperience(user.getWorkExperience());
+        occupationalMapper.insertUserOccupational(user.getOccupational());
+
         user.setCreateTime(DateUtils.getNowDate());
         return userMapper.insertUser(user);
     }
