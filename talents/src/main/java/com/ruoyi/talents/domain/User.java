@@ -257,4 +257,17 @@ public class User extends BaseEntity
     /** 用户工作经历对象 */
     @Excel(name = "用户工作经历对象")
     private UserWorkExperience workExperience;
+
+    /** 审批结果(0:通过 1:不通过) */
+    @Excel(name = "审批结果(0:通过 1:不通过)")
+    private String examineStatus;
+
+    /** 审批时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "审批时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date auditTime;
+
+    /** 审批说明*/
+    @Excel(name = "审批说明")
+    private String auditExplain;
 }

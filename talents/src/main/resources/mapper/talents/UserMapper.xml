@@ -64,10 +64,21 @@
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="status"    column="status"    />
+        <result property="examineStatus"    column="examine_status"    />
+        <result property="auditTime"    column="audit_time"    />
+        <result property="auditExplain"    column="audit_explain"    />
     </resultMap>
 
     <sql id="selectUserVo">
-        select id, user_id, user_name, portrait, password, id_number_type, user_id_number, birth_date, age, phone_number, email, office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region, dwell_site, specialty_type, job_nature, company_name, company_type, company_region, credit_code, second_level_department, position, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, major_academy, is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry, fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution, rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status from user
+        select id, user_id, user_name, portrait, password, id_number_type, user_id_number, birth_date, age, phone_number, email,
+        office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region,
+        dwell_site, specialty_type, job_nature, company_name, company_type, company_region, credit_code, second_level_department,
+        position, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, major_academy,
+        is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry,
+        fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution,
+        rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status
+        examine_status,audit_time,audit_explain
+        from user
     </sql>
 
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
@@ -129,6 +140,9 @@
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
+            <if test="auditTime != null  and auditTime != ''"> and audit_time = #{auditTime}</if>
+            <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
         </where>
     </select>
 
@@ -203,6 +217,9 @@
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="status != null">status,</if>
+            <if test="examineStatus != null">examine_status,</if>
+            <if test="auditTime != null">audit_time,</if>
+            <if test="auditExplain != null">audit_explain,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
@@ -263,6 +280,9 @@
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="status != null">#{status},</if>
+            <if test="examineStatus != null">#{examineStatus},</if>
+            <if test="auditTime != null">#{auditTime},</if>
+            <if test="auditExplain != null">#{auditExplain},</if>
         </trim>
     </insert>
 
@@ -327,6 +347,9 @@
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="status != null">status = #{status},</if>
+            <if test="examineStatus != null">examine_tatus = #{examineStatus},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
         </trim>
         where id = #{id}
     </update>
