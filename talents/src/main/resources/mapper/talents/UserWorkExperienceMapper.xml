@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.talents.mapper.UserWorkExperienceMapper">
+    
+    <resultMap type="UserWorkExperience" id="UserWorkExperienceResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyType"    column="company_type"    />
+        <result property="secondLevelDepartment"    column="second_level_department"    />
+        <result property="position"    column="position"    />
+        <result property="workingTime"    column="working_time"    />
+        <result property="companySite"    column="company_site"    />
+    </resultMap>
+
+    <sql id="selectUserWorkExperienceVo">
+        select id, user_id, company_name, company_type, second_level_department, position, working_time, company_site from user_work_experience
+    </sql>
+
+    <select id="selectUserWorkExperienceList" parameterType="UserWorkExperience" resultMap="UserWorkExperienceResult">
+        <include refid="selectUserWorkExperienceVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyType != null  and companyType != ''"> and company_type = #{companyType}</if>
+            <if test="secondLevelDepartment != null  and secondLevelDepartment != ''"> and second_level_department = #{secondLevelDepartment}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="workingTime != null "> and working_time = #{workingTime}</if>
+            <if test="companySite != null  and companySite != ''"> and company_site = #{companySite}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserWorkExperienceById" parameterType="Long" resultMap="UserWorkExperienceResult">
+        <include refid="selectUserWorkExperienceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserWorkExperience" parameterType="UserWorkExperience" useGeneratedKeys="true" keyProperty="id">
+        insert into user_work_experience
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="companyName != null">company_name,</if>
+            <if test="companyType != null">company_type,</if>
+            <if test="secondLevelDepartment != null">second_level_department,</if>
+            <if test="position != null">position,</if>
+            <if test="workingTime != null">working_time,</if>
+            <if test="companySite != null">company_site,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="companyName != null">#{companyName},</if>
+            <if test="companyType != null">#{companyType},</if>
+            <if test="secondLevelDepartment != null">#{secondLevelDepartment},</if>
+            <if test="position != null">#{position},</if>
+            <if test="workingTime != null">#{workingTime},</if>
+            <if test="companySite != null">#{companySite},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserWorkExperience" parameterType="UserWorkExperience">
+        update user_work_experience
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="companyName != null">company_name = #{companyName},</if>
+            <if test="companyType != null">company_type = #{companyType},</if>
+            <if test="secondLevelDepartment != null">second_level_department = #{secondLevelDepartment},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="workingTime != null">working_time = #{workingTime},</if>
+            <if test="companySite != null">company_site = #{companySite},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserWorkExperienceById" parameterType="Long">
+        delete from user_work_experience where id = #{id}
+    </delete>
+
+    <delete id="deleteUserWorkExperienceByIds" parameterType="String">
+        delete from user_work_experience where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

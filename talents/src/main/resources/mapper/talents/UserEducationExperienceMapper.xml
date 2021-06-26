@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.talents.mapper.UserEducationExperienceMapper">
+    
+    <resultMap type="UserEducationExperience" id="UserEducationExperienceResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="education"    column="education"    />
+        <result property="degree"    column="degree"    />
+        <result property="major"    column="major"    />
+        <result property="schoolTime"    column="school_time"    />
+        <result property="schoolSite"    column="school_site"    />
+    </resultMap>
+
+    <sql id="selectUserEducationExperienceVo">
+        select id, user_id, school_name, education, degree, major, school_time, school_site from user_education_experience
+    </sql>
+
+    <select id="selectUserEducationExperienceList" parameterType="UserEducationExperience" resultMap="UserEducationExperienceResult">
+        <include refid="selectUserEducationExperienceVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="education != null  and education != ''"> and education = #{education}</if>
+            <if test="degree != null  and degree != ''"> and degree = #{degree}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="schoolTime != null "> and school_time = #{schoolTime}</if>
+            <if test="schoolSite != null  and schoolSite != ''"> and school_site = #{schoolSite}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserEducationExperienceById" parameterType="Long" resultMap="UserEducationExperienceResult">
+        <include refid="selectUserEducationExperienceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserEducationExperience" parameterType="UserEducationExperience" useGeneratedKeys="true" keyProperty="id">
+        insert into user_education_experience
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="schoolName != null">school_name,</if>
+            <if test="education != null">education,</if>
+            <if test="degree != null">degree,</if>
+            <if test="major != null">major,</if>
+            <if test="schoolTime != null">school_time,</if>
+            <if test="schoolSite != null">school_site,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="schoolName != null">#{schoolName},</if>
+            <if test="education != null">#{education},</if>
+            <if test="degree != null">#{degree},</if>
+            <if test="major != null">#{major},</if>
+            <if test="schoolTime != null">#{schoolTime},</if>
+            <if test="schoolSite != null">#{schoolSite},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserEducationExperience" parameterType="UserEducationExperience">
+        update user_education_experience
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="schoolName != null">school_name = #{schoolName},</if>
+            <if test="education != null">education = #{education},</if>
+            <if test="degree != null">degree = #{degree},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="schoolTime != null">school_time = #{schoolTime},</if>
+            <if test="schoolSite != null">school_site = #{schoolSite},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserEducationExperienceById" parameterType="Long">
+        delete from user_education_experience where id = #{id}
+    </delete>
+
+    <delete id="deleteUserEducationExperienceByIds" parameterType="String">
+        delete from user_education_experience where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
