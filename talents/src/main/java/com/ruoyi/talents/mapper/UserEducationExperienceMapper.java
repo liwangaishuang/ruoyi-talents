@@ -58,4 +58,22 @@ public interface UserEducationExperienceMapper
      * @return 结果
      */
     public int deleteUserEducationExperienceByIds(Long[] ids);
+
+    /**
+     * 批量userId删除用户教育经历
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+    public int deleteUserEducationExperienceByUserIds(Long[] ids);
+
+    /**
+     * 根据userId删除用户教育经历
+     *
+     * @param id 用户教育经历ID
+     * @return 结果
+     */
+    public int deleteUserEducationExperienceByUserId(Long id);
+
+
 }

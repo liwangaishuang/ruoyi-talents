@@ -8,11 +8,13 @@ import com.ruoyi.talents.domain.UserWorkExperience;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
 import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.talents.mapper.UserMapper;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.service.IUserService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 用户Service业务层处理
@@ -42,13 +44,17 @@ public class UserServiceImpl implements IUserService
     @Override
     public User selectUserById(String id)
     {
-        return userMapper.selectUserById(id);
+        User user = setUser(userMapper.selectUserById(id));
+        setUser(user);
+        return user;
     }
 
     @Override
     public User selectUserById2(String id)
     {
-        return userMapper.selectUserById2(id);
+        User user = setUser(userMapper.selectUserById2(id));
+        setUser(user);
+        return user;
     }
 
     /**
@@ -58,9 +64,14 @@ public class UserServiceImpl implements IUserService
      * @return 用户
      */
     @Override
+    @Transactional
     public List<User> selectUserList(User user)
     {
-        return userMapper.selectUserList(user);
+        List<User> users = userMapper.selectUserList(user);
+        for (User user2:users) {
+            setUser(user2);
+        }
+        return users;
     }
 
     /**
@@ -70,13 +81,19 @@ public class UserServiceImpl implements IUserService
      * @return 结果
      */
     @Override
+    @Transactional
     public int insertUser(User user)
     {
         /**先插入user相关表*/
-        educationExperienceMapper.insertUserEducationExperience(user.getExperience());
-        workExperienceMapper.insertUserWorkExperience(user.getWorkExperience());
-        occupationalMapper.insertUserOccupational(user.getOccupational());
-
+        if (ObjectUtils.isNotEmpty(user.getExperience())){
+            educationExperienceMapper.insertUserEducationExperience(user.getExperience());
+        }
+        if (ObjectUtils.isNotEmpty(user.getWorkExperience())){
+            workExperienceMapper.insertUserWorkExperience(user.getWorkExperience());
+        }
+        if(ObjectUtils.isNotEmpty(user.getOccupational())){
+            occupationalMapper.insertUserOccupational(user.getOccupational());
+        }
         user.setCreateTime(DateUtils.getNowDate());
         return userMapper.insertUser(user);
     }
@@ -88,8 +105,14 @@ public class UserServiceImpl implements IUserService
      * @return 结果
      */
     @Override
+    @Transactional
     public int updateUser(User user)
     {
+        /**先修改user相关表*/
+        educationExperienceMapper.updateUserEducationExperience(user.getExperience());
+        workExperienceMapper.updateUserWorkExperience(user.getWorkExperience());
+        occupationalMapper.updateUserOccupational(user.getOccupational());
+
         user.setUpdateTime(DateUtils.getNowDate());
         return userMapper.updateUser(user);
     }
@@ -101,8 +124,14 @@ public class UserServiceImpl implements IUserService
      * @return 结果
      */
     @Override
-    public int deleteUserByIds(String[] ids)
+    @Transactional
+    public int deleteUserByIds(Long[] ids)
     {
+        /**先删除user相关表*/
+        educationExperienceMapper.deleteUserEducationExperienceByUserIds(ids);
+        workExperienceMapper.deleteUserWorkExperienceByUserIds(ids);
+        occupationalMapper.deleteUserOccupationalByUserIds(ids);
+
         return userMapper.deleteUserByIds(ids);
     }
 
@@ -113,8 +142,21 @@ public class UserServiceImpl implements IUserService
      * @return 结果
      */
     @Override
-    public int deleteUserById(String id)
+    public int deleteUserById(Long id)
     {
+        /**先删除user相关表*/
+        educationExperienceMapper.deleteUserEducationExperienceByUserId(id);
+        workExperienceMapper.deleteUserWorkExperienceByUserId(id);
+        occupationalMapper.deleteUserOccupationalByUserId(id);
+
         return userMapper.deleteUserById(id);
+    }
+
+    public User setUser(User user){
+        /**先查询user相关表*/
+        user.setExperience(educationExperienceMapper.selectUserEducationExperienceById(user.getId()));
+        user.setWorkExperience(workExperienceMapper.selectUserWorkExperienceById(user.getId()));
+        user.setOccupational(occupationalMapper.selectUserOccupationalById(user.getId()));
+        return user;
     }
 }

@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectUserOccupationalById" parameterType="Long" resultMap="UserOccupationalResult">
         <include refid="selectUserOccupationalVo"/>
-        where id = #{id}
+        where user_id = #{id}
     </select>
         
     <insert id="insertUserOccupational" parameterType="UserOccupational" useGeneratedKeys="true" keyProperty="id">
@@ -60,15 +60,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="titleNumber != null">title_number = #{titleNumber},</if>
             <if test="titleGrade != null">title_grade = #{titleGrade},</if>
         </trim>
-        where id = #{id}
+        where user_id = #{id}
     </update>
 
     <delete id="deleteUserOccupationalById" parameterType="Long">
         delete from user_occupational where id = #{id}
     </delete>
 
+    <delete id="deleteUserOccupationalByUserId" parameterType="Long">
+        delete from user_occupational where user_id = #{id}
+    </delete>
+
     <delete id="deleteUserOccupationalByIds" parameterType="String">
         delete from user_occupational where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteUserOccupationalByUserIds" parameterType="String">
+        delete from user_occupational where user_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

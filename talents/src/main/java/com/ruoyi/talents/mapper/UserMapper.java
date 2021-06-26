@@ -51,7 +51,7 @@ public interface UserMapper
      * @param id 用户ID
      * @return 结果
      */
-    public int deleteUserById(String id);
+    public int deleteUserById(Long id);
 
     /**
      * 批量删除用户
@@ -59,5 +59,5 @@ public interface UserMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteUserByIds(String[] ids);
+    public int deleteUserByIds(Long[] ids);
 }

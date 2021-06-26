@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectUserWorkExperienceById" parameterType="Long" resultMap="UserWorkExperienceResult">
         <include refid="selectUserWorkExperienceVo"/>
-        where id = #{id}
+        where user_id = #{id}
     </select>
         
     <insert id="insertUserWorkExperience" parameterType="UserWorkExperience" useGeneratedKeys="true" keyProperty="id">
@@ -75,15 +75,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="endWorkingTime != null">end_working_time = #{endWorkingTime},</if>
             <if test="companySite != null">company_site = #{companySite},</if>
         </trim>
-        where id = #{id}
+        where user_id = #{id}
     </update>
 
     <delete id="deleteUserWorkExperienceById" parameterType="Long">
         delete from user_work_experience where id = #{id}
     </delete>
 
+    <delete id="deleteUserWorkExperienceByUserId" parameterType="Long">
+        delete from user_work_experience where user_id = #{id}
+    </delete>
+
     <delete id="deleteUserWorkExperienceByIds" parameterType="String">
         delete from user_work_experience where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteUserWorkExperienceByUserIds" parameterType="String">
+        delete from user_work_experience where user_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

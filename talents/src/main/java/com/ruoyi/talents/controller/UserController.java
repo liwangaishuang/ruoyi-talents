@@ -92,7 +92,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
-    public int add(@RequestBody User user)
+    public Long add(@RequestBody User user)
     {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         String id = loginUser.getUser().getUserId()+"";
@@ -118,7 +118,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:remove')")
     @Log(title = "用户", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
+    public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(userService.deleteUserByIds(ids));
     }

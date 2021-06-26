@@ -58,4 +58,20 @@ public interface UserWorkExperienceMapper
      * @return 结果
      */
     public int deleteUserWorkExperienceByIds(Long[] ids);
+
+    /**
+     * 根据userId删除用户工作经历
+     *
+     * @param id 用户工作经历ID
+     * @return 结果
+     */
+    public int deleteUserWorkExperienceByUserId(Long id);
+
+    /**
+     * 根据userId批量删除用户工作经历
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+    public int deleteUserWorkExperienceByUserIds(Long[] ids);
 }

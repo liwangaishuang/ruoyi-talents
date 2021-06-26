@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectUserEducationExperienceById" parameterType="Long" resultMap="UserEducationExperienceResult">
         <include refid="selectUserEducationExperienceVo"/>
-        where id = #{id}
+        where user_id = #{id}
     </select>
         
     <insert id="insertUserEducationExperience" parameterType="UserEducationExperience" useGeneratedKeys="true" keyProperty="id">
@@ -75,15 +75,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="endSchoolTime != null">end_school_time = #{endSchoolTime},</if>
             <if test="schoolSite != null">school_site = #{schoolSite},</if>
         </trim>
-        where id = #{id}
+        where user_id = #{id}
     </update>
 
     <delete id="deleteUserEducationExperienceById" parameterType="Long">
         delete from user_education_experience where id = #{id}
     </delete>
 
+    <delete id="deleteUserEducationExperienceByUserId" parameterType="Long">
+        delete from user_education_experience where user_id = #{id}
+    </delete>
+
     <delete id="deleteUserEducationExperienceByIds" parameterType="String">
         delete from user_education_experience where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteUserEducationExperienceByUserIds" parameterType="String">
+        delete from user_education_experience where user_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

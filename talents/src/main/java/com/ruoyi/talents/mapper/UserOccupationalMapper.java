@@ -45,7 +45,7 @@ public interface UserOccupationalMapper
 
     /**
      * 删除用户职业资格
-     * 
+     *
      * @param id 用户职业资格ID
      * @return 结果
      */
@@ -53,9 +53,25 @@ public interface UserOccupationalMapper
 
     /**
      * 批量删除用户职业资格
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
     public int deleteUserOccupationalByIds(Long[] ids);
+
+    /**
+     * 根据userId删除用户职业资格
+     *
+     * @param id 用户职业资格ID
+     * @return 结果
+     */
+    public int deleteUserOccupationalByUserId(Long id);
+
+    /**
+     * 根据userId批量删除用户职业资格
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+    public int deleteUserOccupationalByUserIds(Long[] ids);
 }

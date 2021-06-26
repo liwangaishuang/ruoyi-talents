@@ -19,7 +19,7 @@ public class User extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
-    private int id;
+    private Long id;
 
     /** 用户表id */
     @Excel(name = "用户表id")

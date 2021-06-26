@@ -51,7 +51,7 @@ public interface IUserService
      * @param ids 需要删除的用户ID
      * @return 结果
      */
-    public int deleteUserByIds(String[] ids);
+    public int deleteUserByIds(Long[] ids);
 
     /**
      * 删除用户信息
@@ -59,5 +59,5 @@ public interface IUserService
      * @param id 用户ID
      * @return 结果
      */
-    public int deleteUserById(String id);
+    public int deleteUserById(Long id);
 }
