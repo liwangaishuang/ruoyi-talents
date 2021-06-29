@@ -5,6 +5,8 @@ import java.util.List;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.talents.utils.WordUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.framework.web.service.TokenService;
@@ -35,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/declare/specialist")
+@Api(value = "填报用户",tags = "填报用户")
 public class UserController extends BaseController
 {
     @Autowired
@@ -47,6 +50,7 @@ public class UserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('talents:self:list')")
     @GetMapping("/list")
+    @ApiOperation(httpMethod = "GET",value = "查询用户列表")
     public TableDataInfo list(User user)
     {
         startPage();
@@ -60,6 +64,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:export')")
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
+    @ApiOperation(httpMethod = "GET",value = "导出用户列表")
     public AjaxResult export(User user)
     {
         List<User> list = userService.selectUserList(user);
@@ -72,19 +77,11 @@ public class UserController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('talents:self:query')")
     @GetMapping(value = "/{id}")
+    @ApiOperation(httpMethod = "GET",value = "获取用户详细信息")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(userService.selectUserById(id));
     }
-
-    /**
-     * 获取当前用户详细信息
-     */
-    @GetMapping("/now/{id}")
-    public AjaxResult getNowInfo(@PathVariable("id") String id) {
-        return AjaxResult.success(userService.selectUserById2(id));
-    }
-
 
     /**
      * 新增用户
@@ -92,6 +89,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
+    @ApiOperation(httpMethod = "POST",value = "新增用户")
     public Long add(@RequestBody User user)
     {
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
@@ -107,6 +105,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:edit')")
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
+    @ApiOperation(httpMethod = "PUT",value = "修改用户")
     public AjaxResult edit(@RequestBody User user)
     {
         return toAjax(userService.updateUser(user));
@@ -118,6 +117,7 @@ public class UserController extends BaseController
     @PreAuthorize("@ss.hasPermi('talents:self:remove')")
     @Log(title = "用户", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
+    @ApiOperation(httpMethod = "DELETE",value = "删除用户")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(userService.deleteUserByIds(ids));
@@ -129,7 +129,7 @@ public class UserController extends BaseController
      * 导出用户word
      */
     @GetMapping("/exportWord")
-    //@PreAuthorize("@ss.hasPermi('talents:self:exportWord')")
+    @ApiOperation(httpMethod = "GET",value = "导出用户word")
     public AjaxResult exportWord(HttpServletResponse response, User user)
     {
         User user1 = userService.selectUserById(user.getId()+"");

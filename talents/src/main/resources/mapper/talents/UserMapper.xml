@@ -76,7 +76,7 @@
         position, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, major_academy,
         is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry,
         fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution,
-        rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status
+        rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status,
         examine_status,audit_time,audit_explain
         from user
     </sql>
