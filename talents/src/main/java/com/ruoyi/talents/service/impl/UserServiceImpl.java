@@ -49,14 +49,6 @@ public class UserServiceImpl implements IUserService
         return user;
     }
 
-    @Override
-    public User selectUserById2(String id)
-    {
-        User user = setUser(userMapper.selectUserById2(id));
-        setUser(user);
-        return user;
-    }
-
     /**
      * 查询用户列表
      *
@@ -68,6 +60,9 @@ public class UserServiceImpl implements IUserService
     public List<User> selectUserList(User user)
     {
         List<User> users = userMapper.selectUserList(user);
+        if (ObjectUtils.isEmpty(users)){
+            return null;
+        }
         for (User user2:users) {
             setUser(user2);
         }

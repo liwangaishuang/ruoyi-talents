@@ -46,11 +46,10 @@ public class UserController extends BaseController
     @Autowired
     private TokenService tokenService;
     /**
-     * 查询用户列表
+     * 查询用户人才申报审批列表
      */
-    @PreAuthorize("@ss.hasPermi('talents:self:list')")
-    @GetMapping("/list")
-    @ApiOperation(httpMethod = "GET",value = "查询用户列表")
+    @GetMapping("/examine/list")
+    @ApiOperation(httpMethod = "GET",value = "查询用户人才申报审批列表")
     public TableDataInfo list(User user)
     {
         startPage();

@@ -84,6 +84,7 @@
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
         <include refid="selectUserVo"/>
         <where>
+            1=1 and status in (1,2)
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="portrait != null  and portrait != ''"> and portrait = #{portrait}</if>
@@ -147,11 +148,6 @@
     </select>
 
     <select id="selectUserById" parameterType="String" resultMap="UserResult">
-        <include refid="selectUserVo"/>
-        where id = #{id}
-    </select>
-
-    <select id="selectUserById2" parameterType="String" resultMap="UserResult">
         <include refid="selectUserVo"/>
         where id = #{id}
     </select>
