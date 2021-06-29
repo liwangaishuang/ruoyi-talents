@@ -72,6 +72,18 @@ public class UserController extends BaseController
     }
 
     /**
+     * 查询人才移除管理列表
+     */
+    @GetMapping("/remove/list")
+    @ApiOperation(httpMethod = "GET",value = "查询人才移除管理列表")
+    public TableDataInfo selectRemoveList(User user)
+    {
+        startPage();
+        List<User> list = userService.selectRemoveList(user);
+        return getDataTable(list);
+    }
+
+    /**
      * 查询人才申报审批列表
      */
     @GetMapping("/examine/list")

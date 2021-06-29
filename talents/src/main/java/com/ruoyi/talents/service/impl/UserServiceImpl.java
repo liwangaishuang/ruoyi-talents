@@ -85,6 +85,20 @@ public class UserServiceImpl implements IUserService
 
     @Override
     @Transactional
+    public List<User> selectRemoveList(User user)
+    {
+        List<User> users = userMapper.selectRemoveList(user);
+        if (ObjectUtils.isEmpty(users)){
+            return null;
+        }
+        for (User user2:users) {
+            setUser(user2);
+        }
+        return users;
+    }
+
+    @Override
+    @Transactional
     public List<User> selectExamineList(User user)
     {
         List<User> users = userMapper.selectExamineList(user);

@@ -29,6 +29,8 @@ public interface IUserService
 
     public List<User> selectSpecialistList(User user);
 
+    public List<User> selectRemoveList(User user);
+
     public List<User> selectExamineList(User user);
 
     /**
