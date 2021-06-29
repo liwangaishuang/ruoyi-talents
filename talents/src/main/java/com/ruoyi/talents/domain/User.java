@@ -263,17 +263,20 @@ public class User
     private String examineStatus;
 
     /** 审批时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "审批时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "审批时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date auditTime;
 
     /** 审批说明*/
     @Excel(name = "审批说明")
     private String auditExplain;
 
+    /** 担任评审专家最近年度 */
+    @Excel(name = "担任评审专家最近年度")
+    private String actYear;
 
 
-
+    /**BaseEntity*/
     /** 搜索值 */
     private String searchValue;
 

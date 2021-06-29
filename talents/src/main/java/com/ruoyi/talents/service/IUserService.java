@@ -27,7 +27,9 @@ public interface IUserService
      */
     public List<User> selectUserList(User user);
 
-    public List<User> selectUserExamineList(User user);
+    public List<User> selectSpecialistList(User user);
+
+    public List<User> selectExamineList(User user);
 
     /**
      * 新增用户

@@ -60,16 +60,26 @@ public class UserController extends BaseController
     }
 
     /**
-     * 查询用户人才申报审批列表
+     * 查询人才专家库列表
+     */
+    @GetMapping("/specialist/list")
+    @ApiOperation(httpMethod = "GET",value = "查询人才专家库列表")
+    public TableDataInfo specialistList(User user)
+    {
+        startPage();
+        List<User> list = userService.selectSpecialistList(user);
+        return getDataTable(list);
+    }
+
+    /**
+     * 查询人才申报审批列表
      */
     @GetMapping("/examine/list")
-    @ApiOperation(httpMethod = "GET",value = "查询用户人才申报审批列表")
-    public TableDataInfo examineList(UserDto userDto)
+    @ApiOperation(httpMethod = "GET",value = "查询人才申报审批列表")
+    public TableDataInfo examineList(User user)
     {
-        User user = new User();
-        BeanUtils.copyProperties(userDto,user);
         startPage();
-        List<User> list = userService.selectUserExamineList(user);
+        List<User> list = userService.selectExamineList(user);
         return getDataTable(list);
     }
 
