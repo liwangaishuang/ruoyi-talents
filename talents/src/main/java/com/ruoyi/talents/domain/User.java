@@ -243,7 +243,7 @@ public class User
     private String resumeSite;
 
     /** 申报状态(0:暂存 1:未审核 2:已审核 3:已删除) */
-    @Excel(name = "申报状态(0:暂存 1:未审核 2:已审核 3:已删除)")
+    @Excel(name = "申报状态(0:暂存 1:未审核 2:已审核)")
     private String status;
 
     /** 用户教育经历对象 */
@@ -275,6 +275,22 @@ public class User
     @Excel(name = "担任评审专家最近年度")
     private String actYear;
 
+    /** 是否移除 */
+    @Excel(name = "是否移除")
+    private String isRemove;
+
+    /** 移除时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "移除时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    private Date removeTime;
+
+    /** 移除结束时间 */
+    @Excel(name = "移除结束时间")
+    private String removeOverTime;
+
+    /** 移除原因 */
+    @Excel(name = "移除原因")
+    private String removeCause;
 
     /**BaseEntity*/
     /** 搜索值 */

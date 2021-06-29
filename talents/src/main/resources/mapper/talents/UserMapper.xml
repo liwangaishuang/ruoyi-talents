@@ -68,6 +68,10 @@
         <result property="auditTime"    column="audit_time"    />
         <result property="auditExplain"    column="audit_explain"    />
         <result property="actYear"    column="act_year"    />
+        <result property="isRemove"    column="is_remove"    />
+        <result property="removeTime"    column="remove_time"    />
+        <result property="removeOverTime"    column="remove_over_time"    />
+        <result property="removeCause"    column="remove_cause"    />
     </resultMap>
 
     <sql id="selectUserVo">
@@ -78,7 +82,7 @@
         is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry,
         fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution,
         rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status,
-        examine_status,audit_time,audit_explain,act_year
+        examine_status,audit_time,audit_explain,act_year,is_remove,remove_time,remove_over_time,remove_cause
         from user
     </sql>
 
@@ -142,9 +146,13 @@
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
-            <if test="auditTime != null  and auditTime != ''"> and audit_time = #{auditTime}</if>
+            <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="actYear != null  and actYear != ''"> and act_year = #{actYear}</if>
+            <if test="isRemove != null  and isRemove != ''"> and is_remove = #{isRemove}</if>
+            <if test="removeTime != null"> and remove_time = #{removeTime}</if>
+            <if test="removeOverTime != null  and removeOverTime != ''"> and remove_over_time = #{removeOverTime}</if>
+            <if test="removeCause != null  and removeCause != ''"> and remove_cause = #{removeCause}</if>
         </where>
     </select>
 
@@ -207,9 +215,13 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
-            <if test="auditTime != null  and auditTime != ''"> and audit_time = #{auditTime}</if>
+            <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="actYear != null  and actYear != ''"> and act_year = #{actYear}</if>
+            <if test="isRemove != null  and isRemove != ''"> and is_remove = #{isRemove}</if>
+            <if test="removeTime != null"> and remove_time = #{removeTime}</if>
+            <if test="removeOverTime != null  and removeOverTime != ''"> and remove_over_time = #{removeOverTime}</if>
+            <if test="removeCause != null  and removeCause != ''"> and remove_cause = #{removeCause}</if>
         </where>
     </select>
 
@@ -274,9 +286,13 @@
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
-            <if test="auditTime != null  and auditTime != ''"> and audit_time = #{auditTime}</if>
+            <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="actYear != null  and actYear != ''"> and act_year = #{actYear}</if>
+            <if test="isRemove != null  and isRemove != ''"> and is_remove = #{isRemove}</if>
+            <if test="removeTime != null"> and remove_time = #{removeTime}</if>
+            <if test="removeOverTime != null  and removeOverTime != ''"> and remove_over_time = #{removeOverTime}</if>
+            <if test="removeCause != null  and removeCause != ''"> and remove_cause = #{removeCause}</if>
         </where>
         order by status
     </select>
@@ -351,6 +367,10 @@
             <if test="auditTime != null">audit_time,</if>
             <if test="auditExplain != null">audit_explain,</if>
             <if test="actYear != null">act_year,</if>
+            <if test="isRemove != null">is_remove,</if>
+            <if test="removeTime != null">remove_time,</if>
+            <if test="removeOverTime != null">remove_over_time,</if>
+            <if test="removeCause != null">remove_cause,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
@@ -415,6 +435,10 @@
             <if test="auditTime != null">#{auditTime},</if>
             <if test="auditExplain != null">#{auditExplain},</if>
             <if test="actYear != null">#{actYear},</if>
+            <if test="isRemove != null">#{isRemove},</if>
+            <if test="removeTime != null">#{removeTime},</if>
+            <if test="removeOverTime != null">#{removeOverTime},</if>
+            <if test="removeCause != null">#{removeCause},</if>
         </trim>
     </insert>
 
@@ -483,6 +507,10 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
             <if test="actYear != null">act_year = #{actYear},</if>
+            <if test="isRemove != null">is_remove = #{isRemove},</if>
+            <if test="removeTime != null">remove_time = #{removeTime},</if>
+            <if test="removeOverTime != null">remove_over_time = #{removeOverTime},</if>
+            <if test="removeCause != null">remove_cause = #{removeCause},</if>
         </trim>
         where id = #{id}
     </update>
