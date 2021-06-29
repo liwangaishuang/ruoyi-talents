@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.utils.WordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.framework.web.service.TokenService;
@@ -46,14 +48,28 @@ public class UserController extends BaseController
     @Autowired
     private TokenService tokenService;
     /**
-     * 查询用户人才申报审批列表
+     * 查询列表
      */
-    @GetMapping("/examine/list")
-    @ApiOperation(httpMethod = "GET",value = "查询用户人才申报审批列表")
+    @GetMapping("/list")
+    @ApiOperation(httpMethod = "GET",value = "查询列表")
     public TableDataInfo list(User user)
     {
         startPage();
         List<User> list = userService.selectUserList(user);
+        return getDataTable(list);
+    }
+
+    /**
+     * 查询用户人才申报审批列表
+     */
+    @GetMapping("/examine/list")
+    @ApiOperation(httpMethod = "GET",value = "查询用户人才申报审批列表")
+    public TableDataInfo examineList(UserDto userDto)
+    {
+        User user = new User();
+        BeanUtils.copyProperties(userDto,user);
+        startPage();
+        List<User> list = userService.selectUserExamineList(user);
         return getDataTable(list);
     }
 

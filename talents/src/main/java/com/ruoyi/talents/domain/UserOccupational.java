@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2021-06-26
  */
-public class UserOccupational extends BaseEntity
+public class UserOccupational
 {
     private static final long serialVersionUID = 1L;
 

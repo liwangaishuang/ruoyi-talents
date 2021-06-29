@@ -84,6 +84,71 @@
     <select id="selectUserList" parameterType="User" resultMap="UserResult">
         <include refid="selectUserVo"/>
         <where>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="portrait != null  and portrait != ''"> and portrait = #{portrait}</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="idNumberType != null  and idNumberType != ''"> and id_number_type = #{idNumberType}</if>
+            <if test="userIdNumber != null  and userIdNumber != ''"> and user_id_number = #{userIdNumber}</if>
+            <if test="birthDate != null "> and birth_date = #{birthDate}</if>
+            <if test="age != null  and age != ''"> and age = #{age}</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="officePhone != null  and officePhone != ''"> and office_phone = #{officePhone}</if>
+            <if test="homeTelephone != null  and homeTelephone != ''"> and home_telephone = #{homeTelephone}</if>
+            <if test="userSex != null  and userSex != ''"> and user_sex = #{userSex}</if>
+            <if test="nationality != null  and nationality != ''"> and nationality = #{nationality}</if>
+            <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
+            <if test="postalCode != null  and postalCode != ''"> and postal_code = #{postalCode}</if>
+            <if test="politicsStatus != null  and politicsStatus != ''"> and politics_status = #{politicsStatus}</if>
+            <if test="professional != null  and professional != ''"> and professional = #{professional}</if>
+            <if test="dwellRegion != null  and dwellRegion != ''"> and dwell_region = #{dwellRegion}</if>
+            <if test="dwellSite != null  and dwellSite != ''"> and dwell_site = #{dwellSite}</if>
+            <if test="specialtyType != null  and specialtyType != ''"> and specialty_type = #{specialtyType}</if>
+            <if test="jobNature != null  and jobNature != ''"> and job_nature = #{jobNature}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyType != null  and companyType != ''"> and company_type = #{companyType}</if>
+            <if test="companyRegion != null  and companyRegion != ''"> and company_region = #{companyRegion}</if>
+            <if test="creditCode != null  and creditCode != ''"> and credit_code = #{creditCode}</if>
+            <if test="secondLevelDepartment != null  and secondLevelDepartment != ''"> and second_level_department = #{secondLevelDepartment}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="companySite != null  and companySite != ''"> and company_site = #{companySite}</if>
+            <if test="highestEducation != null  and highestEducation != ''"> and highest_education = #{highestEducation}</if>
+            <if test="graduateAcademy != null  and graduateAcademy != ''"> and graduate_academy = #{graduateAcademy}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="highestDegree != null  and highestDegree != ''"> and highest_degree = #{highestDegree}</if>
+            <if test="awardAcademy != null  and awardAcademy != ''"> and award_academy = #{awardAcademy}</if>
+            <if test="majorAcademy != null  and majorAcademy != ''"> and major_academy = #{majorAcademy}</if>
+            <if test="isAcademician != null  and isAcademician != ''"> and is_academician = #{isAcademician}</if>
+            <if test="isDoctoralSupervisor != null  and isDoctoralSupervisor != ''"> and is_doctoral_supervisor = #{isDoctoralSupervisor}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="degree != null  and degree != ''"> and degree = #{degree}</if>
+            <if test="standard != null  and standard != ''"> and standard = #{standard}</if>
+            <if test="reviewExperience != null  and reviewExperience != ''"> and review_experience = #{reviewExperience}</if>
+            <if test="mainIndustry != null  and mainIndustry != ''"> and main_industry = #{mainIndustry}</if>
+            <if test="elseIndustry != null  and elseIndustry != ''"> and else_industry = #{elseIndustry}</if>
+            <if test="fundSubject != null  and fundSubject != ''"> and fund_subject = #{fundSubject}</if>
+            <if test="internationalDiscipline != null  and internationalDiscipline != ''"> and international_discipline = #{internationalDiscipline}</if>
+            <if test="educationSubject != null  and educationSubject != ''"> and education_subject = #{educationSubject}</if>
+            <if test="industries != null  and industries != ''"> and industries = #{industries}</if>
+            <if test="researchDirection != null  and researchDirection != ''"> and research_direction = #{researchDirection}</if>
+            <if test="workContent != null  and workContent != ''"> and work_content = #{workContent}</if>
+            <if test="mainContribution != null  and mainContribution != ''"> and main_contribution = #{mainContribution}</if>
+            <if test="rewardsPunishment != null  and rewardsPunishment != ''"> and rewards_punishment = #{rewardsPunishment}</if>
+            <if test="avoidCompany != null  and avoidCompany != ''"> and avoid_company = #{avoidCompany}</if>
+            <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
+            <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
+            <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
+            <if test="auditTime != null  and auditTime != ''"> and audit_time = #{auditTime}</if>
+            <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
+        </where>
+    </select>
+
+    <select id="selectUserExamineList" parameterType="User" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        <where>
             1=1 and status in (1,2)
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>

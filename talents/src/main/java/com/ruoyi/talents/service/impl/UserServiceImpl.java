@@ -69,6 +69,20 @@ public class UserServiceImpl implements IUserService
         return users;
     }
 
+    @Override
+    @Transactional
+    public List<User> selectUserExamineList(User user)
+    {
+        List<User> users = userMapper.selectUserExamineList(user);
+        if (ObjectUtils.isEmpty(users)){
+            return null;
+        }
+        for (User user2:users) {
+            setUser(user2);
+        }
+        return users;
+    }
+
     /**
      * 新增用户
      *

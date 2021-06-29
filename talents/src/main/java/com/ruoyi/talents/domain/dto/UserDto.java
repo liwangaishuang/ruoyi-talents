@@ -1,8 +1,12 @@
-package com.ruoyi.talents.domain;
+package com.ruoyi.talents.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.talents.domain.UserEducationExperience;
+import com.ruoyi.talents.domain.UserOccupational;
+import com.ruoyi.talents.domain.UserWorkExperience;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,7 +18,7 @@ import java.util.Date;
  * @date 2021-06-11
  */
 @Data
-public class User
+public class UserDto
 {
     private static final long serialVersionUID = 1L;
 
@@ -246,17 +250,6 @@ public class User
     @Excel(name = "申报状态(0:暂存 1:未审核 2:已审核 3:已删除)")
     private String status;
 
-    /** 用户教育经历对象 */
-    @Excel(name = "用户教育经历对象")
-    private UserEducationExperience experience;
-
-    /** 用户职业资格对象 */
-    @Excel(name = "用户职业资格对象")
-    private UserOccupational occupational;
-
-    /** 用户工作经历对象 */
-    @Excel(name = "用户工作经历对象")
-    private UserWorkExperience workExperience;
 
     /** 审批结果(0:通过 1:不通过) */
     @Excel(name = "审批结果(0:通过 1:不通过)")
@@ -270,7 +263,6 @@ public class User
     /** 审批说明*/
     @Excel(name = "审批说明")
     private String auditExplain;
-
 
 
 
@@ -293,5 +285,4 @@ public class User
 
     /** 备注 */
     private String remark;
-
 }

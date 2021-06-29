@@ -15,7 +15,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2021-06-26
  */
 @Data
-public class UserWorkExperience extends BaseEntity
+public class UserWorkExperience
 {
     private static final long serialVersionUID = 1L;
 
