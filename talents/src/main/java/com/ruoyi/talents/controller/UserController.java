@@ -96,6 +96,18 @@ public class UserController extends BaseController
     }
 
     /**
+     * 注册用户
+     */
+    @GetMapping("/registered/list")
+    @ApiOperation(httpMethod = "GET",value = "注册用户")
+    public TableDataInfo registeredList(UserDto userDto)
+    {
+        startPage();
+        List<UserDto> list = userService.selectRegisteredList(userDto);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出用户列表
      */
     @PreAuthorize("@ss.hasPermi('talents:self:export')")

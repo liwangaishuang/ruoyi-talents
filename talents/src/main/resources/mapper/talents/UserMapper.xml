@@ -74,6 +74,16 @@
         <result property="removeCause"    column="remove_cause"    />
     </resultMap>
 
+    <resultMap type="UserDto" id="RegisteredResult">
+        <result property="userName"    column="user_name"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyRegion"    column="company_region"    />
+        <result property="companyType"    column="company_type"    />
+        <result property="phoneNumber"    column="phonenumber"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
     <sql id="selectUserVo">
         select id, user_id, user_name, portrait, password, id_number_type, user_id_number, birth_date, age, phone_number, email,
         office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region,
@@ -364,6 +374,20 @@
             <if test="removeCause != null  and removeCause != ''"> and remove_cause = #{removeCause}</if>
         </where>
         order by status
+    </select>
+
+    <select id="selectRegisteredList" parameterType="UserDto" resultMap="RegisteredResult">
+        select su.user_name,su.nick_name,u.company_name,u.company_region,u.company_type,su.phonenumber,su.status
+        from (select u1.*
+        from user u1,(select user_id,max(create_time) time from user group by user_id) u2
+        where u1.user_id=u2.user_id and u1.create_time=u2.time) u, sys_user su
+        where u.user_id=su.user_id
+        <if test="userName != null  and userName != ''"> and su.user_name like concat('%', #{userName}, '%')</if>
+        <if test="nickName != null  and nickName != ''"> and su.nick_name like concat('%', #{nickName}, '%')</if>
+        <if test="companyName != null  and companyName != ''"> and u.company_name like concat('%', #{companyName}, '%')</if>
+        <if test="companyRegion != null  and companyRegion != ''"> and u.company_region = #{companyRegion}</if>
+        <if test="companyType != null  and companyType != ''"> and u.company_type = #{companyType}</if>
+        <if test="status != null  and status != ''"> and su.status = #{status}</if>
     </select>
 
     <select id="selectUserById" parameterType="String" resultMap="UserResult">

@@ -5,6 +5,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.talents.domain.UserEducationExperience;
 import com.ruoyi.talents.domain.UserOccupational;
 import com.ruoyi.talents.domain.UserWorkExperience;
+import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
 import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
@@ -106,7 +107,14 @@ public class UserServiceImpl implements IUserService
                 setUser(user2);
             }
         }
+        return users;
+    }
 
+    @Override
+    @Transactional
+    public List<UserDto> selectRegisteredList(UserDto userDto)
+    {
+        List<UserDto> users = userMapper.selectRegisteredList(userDto);
         return users;
     }
 

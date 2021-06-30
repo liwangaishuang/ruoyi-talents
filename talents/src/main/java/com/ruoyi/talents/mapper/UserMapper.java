@@ -2,6 +2,7 @@ package com.ruoyi.talents.mapper;
 
 import java.util.List;
 import com.ruoyi.talents.domain.User;
+import com.ruoyi.talents.domain.dto.UserDto;
 
 /**
  * 用户Mapper接口
@@ -32,6 +33,8 @@ public interface UserMapper
     public List<User> selectRemoveList(User user);
 
     public List<User> selectExamineList(User user);
+
+    public List<UserDto> selectRegisteredList(UserDto userDto);
 
     /**
      * 新增用户

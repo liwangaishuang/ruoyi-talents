@@ -2,6 +2,7 @@ package com.ruoyi.talents.service;
 
 import java.util.List;
 import com.ruoyi.talents.domain.User;
+import com.ruoyi.talents.domain.dto.UserDto;
 
 /**
  * 用户Service接口
@@ -32,6 +33,8 @@ public interface IUserService
     public List<User> selectRemoveList(User user);
 
     public List<User> selectExamineList(User user);
+
+    public List<UserDto> selectRegisteredList(UserDto userDto);
 
     /**
      * 新增用户
