@@ -74,12 +74,12 @@ public class UserServiceImpl implements IUserService
     public List<User> selectSpecialistList(User user)
     {
         List<User> users = userMapper.selectSpecialistList(user);
-        if (ObjectUtils.isEmpty(users)){
-            return null;
+        if (!ObjectUtils.isEmpty(users)){
+            for (User user2:users) {
+                setUser(user2);
+            }
         }
-        for (User user2:users) {
-            setUser(user2);
-        }
+
         return users;
     }
 
@@ -88,11 +88,10 @@ public class UserServiceImpl implements IUserService
     public List<User> selectRemoveList(User user)
     {
         List<User> users = userMapper.selectRemoveList(user);
-        if (ObjectUtils.isEmpty(users)){
-            return null;
-        }
-        for (User user2:users) {
-            setUser(user2);
+        if (!ObjectUtils.isEmpty(users)){
+            for (User user2:users) {
+                setUser(user2);
+            }
         }
         return users;
     }
@@ -102,12 +101,12 @@ public class UserServiceImpl implements IUserService
     public List<User> selectExamineList(User user)
     {
         List<User> users = userMapper.selectExamineList(user);
-        if (ObjectUtils.isEmpty(users)){
-            return null;
+        if (!ObjectUtils.isEmpty(users)){
+            for (User user2:users) {
+                setUser(user2);
+            }
         }
-        for (User user2:users) {
-            setUser(user2);
-        }
+
         return users;
     }
 
