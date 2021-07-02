@@ -143,30 +143,34 @@ public class SysUserController extends BaseController
     }
 
     /**
-     * 新增用户2
+     * 填报端新增用户
      */
-    @Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @Log(title = "填报端新增用户", businessType = BusinessType.INSERT)
     @PostMapping("/add2")
     public AjaxResult add2(@Validated @RequestBody SysUser user)
     {
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user.getUserName())))
         {
-            return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
+            return AjaxResult.error("填报端新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         }
         else if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
         {
-            return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
+            return AjaxResult.error("填报端新增用户'" + user.getUserName() + "'失败，手机号码已存在");
         }
         else if (StringUtils.isNotEmpty(user.getEmail())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
-            return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
+            return AjaxResult.error("填报端新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         //user.setCreateBy(SecurityUtils.getUsername());
         user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         user.setNickName(user.getExpertsName());
-        System.out.println(user);
+        /**添加默认角色*/
+        Long[] longs = new Long[1];
+        longs[0]=102L;
+        user.setRoleIds(longs);
+        user.setDeptId(102L);
         return toAjax(userService.insertUser(user));
     }
 
