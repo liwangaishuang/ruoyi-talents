@@ -1,8 +1,10 @@
 package com.ruoyi.talents.mapper;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户Mapper接口
@@ -51,6 +53,8 @@ public interface UserMapper
      * @return 结果
      */
     public int updateUser(User user);
+
+    public int editPassword(@Param(value = "userId") String userId,@Param(value = "password") String password,@Param(value = "updateTime") Date updateTime);
 
     /**
      * 删除用户

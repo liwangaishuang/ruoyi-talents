@@ -1,7 +1,11 @@
 package com.ruoyi.talents.service.impl;
 
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.talents.domain.UserEducationExperience;
 import com.ruoyi.talents.domain.UserOccupational;
 import com.ruoyi.talents.domain.UserWorkExperience;
@@ -160,6 +164,15 @@ public class UserServiceImpl implements IUserService
         user.setUpdateTime(DateUtils.getNowDate());
         return userMapper.updateUser(user);
     }
+
+    @Override
+    public int editPassword(SysUser sysUser)
+    {   String userId=sysUser.getUserId()+"";
+        Date updateTime = DateUtils.getNowDate();
+        String password=SecurityUtils.encryptPassword(sysUser.getPassword());
+        return userMapper.editPassword(userId,password,updateTime);
+    }
+
 
     /**
      * 批量删除用户

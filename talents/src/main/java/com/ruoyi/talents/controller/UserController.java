@@ -2,6 +2,7 @@ package com.ruoyi.talents.controller;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.talents.domain.dto.UserDto;
@@ -158,6 +159,17 @@ public class UserController extends BaseController
     public AjaxResult edit(@RequestBody User user)
     {
         return toAjax(userService.updateUser(user));
+    }
+
+    /**
+     * 修改用户密码
+     */
+    @Log(title = "修改用户密码", businessType = BusinessType.UPDATE)
+    @PutMapping("/edit")
+    @ApiOperation(httpMethod = "PUT",value = "修改用户密码")
+    public AjaxResult editPassword(@RequestBody SysUser sysUser)
+    {
+        return toAjax(userService.editPassword(sysUser));
     }
 
     /**

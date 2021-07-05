@@ -1,6 +1,8 @@
 package com.ruoyi.talents.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 
@@ -51,6 +53,8 @@ public interface IUserService
      * @return 结果
      */
     public int updateUser(User user);
+
+    public int editPassword(SysUser sysUser);
 
     /**
      * 批量删除用户

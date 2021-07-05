@@ -75,6 +75,7 @@
     </resultMap>
 
     <resultMap type="UserDto" id="RegisteredResult">
+        <result property="userId"    column="user_id"    />
         <result property="userName"    column="user_name"    />
         <result property="nickName"    column="nick_name"    />
         <result property="companyName"    column="company_name"    />
@@ -377,7 +378,7 @@
     </select>
 
     <select id="selectRegisteredList" parameterType="UserDto" resultMap="RegisteredResult">
-        select su.user_name,su.nick_name,u.company_name,u.company_region,u.company_type,su.phonenumber,su.status
+        select su.user_id,su.user_name,su.nick_name,u.company_name,u.company_region,u.company_type,su.phonenumber,su.status
         from (select u1.*
         from user u1,(select user_id,max(create_time) time from user group by user_id) u2
         where u1.user_id=u2.user_id and u1.create_time=u2.time) u, sys_user su
@@ -606,6 +607,15 @@
             <if test="removeCause != null">remove_cause = #{removeCause},</if>
         </trim>
         where id = #{id}
+    </update>
+
+    <update id="editPassword">
+        update sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="password != null">password = #{password},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where user_id = #{userId}
     </update>
 
     <delete id="deleteUserById" parameterType="String">

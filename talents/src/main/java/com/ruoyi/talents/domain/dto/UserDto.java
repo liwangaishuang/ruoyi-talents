@@ -22,6 +22,10 @@ public class UserDto
 {
     private static final long serialVersionUID = 1L;
 
+    /** userId */
+    @Excel(name = "userId")
+    private String userId;
+
     /** 用户姓名 */
     @Excel(name = "用户姓名")
     private String userName;
