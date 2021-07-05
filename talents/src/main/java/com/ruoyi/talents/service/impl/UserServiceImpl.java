@@ -185,9 +185,11 @@ public class UserServiceImpl implements IUserService
     public int deleteUserByIds(Long[] ids)
     {
         /**先删除user相关表*/
-        educationExperienceMapper.deleteUserEducationExperienceByUserIds(ids);
-        workExperienceMapper.deleteUserWorkExperienceByUserIds(ids);
-        occupationalMapper.deleteUserOccupationalByUserIds(ids);
+        if (ObjectUtils.isNotEmpty(ids)){
+            educationExperienceMapper.deleteUserEducationExperienceByUserIds(ids);
+            workExperienceMapper.deleteUserWorkExperienceByUserIds(ids);
+            occupationalMapper.deleteUserOccupationalByUserIds(ids);
+        }
 
         return userMapper.deleteUserByIds(ids);
     }
@@ -202,18 +204,22 @@ public class UserServiceImpl implements IUserService
     public int deleteUserById(Long id)
     {
         /**先删除user相关表*/
-        educationExperienceMapper.deleteUserEducationExperienceByUserId(id);
-        workExperienceMapper.deleteUserWorkExperienceByUserId(id);
-        occupationalMapper.deleteUserOccupationalByUserId(id);
+        if (ObjectUtils.isNotEmpty(id)){
+            educationExperienceMapper.deleteUserEducationExperienceByUserId(id);
+            workExperienceMapper.deleteUserWorkExperienceByUserId(id);
+            occupationalMapper.deleteUserOccupationalByUserId(id);
+        }
 
         return userMapper.deleteUserById(id);
     }
 
     public User setUser(User user){
         /**先查询user相关表*/
-        user.setExperience(educationExperienceMapper.selectUserEducationExperienceById(user.getId()));
-        user.setWorkExperience(workExperienceMapper.selectUserWorkExperienceById(user.getId()));
-        user.setOccupational(occupationalMapper.selectUserOccupationalById(user.getId()));
+        if (ObjectUtils.isNotEmpty(user)){
+            user.setExperience(educationExperienceMapper.selectUserEducationExperienceById(user.getId()));
+            user.setWorkExperience(workExperienceMapper.selectUserWorkExperienceById(user.getId()));
+            user.setOccupational(occupationalMapper.selectUserOccupationalById(user.getId()));
+        }
         return user;
     }
 }
