@@ -74,6 +74,7 @@ public class UserServiceImpl implements IUserService
         return users;
     }
 
+    /**查询人才专家库列表*/
     @Override
     @Transactional
     public List<User> selectSpecialistList(User user)
@@ -88,6 +89,7 @@ public class UserServiceImpl implements IUserService
         return users;
     }
 
+    /**查询人才移除管理列表*/
     @Override
     @Transactional
     public List<User> selectRemoveList(User user)
@@ -101,6 +103,7 @@ public class UserServiceImpl implements IUserService
         return users;
     }
 
+    /**查询人才申报审批列表*/
     @Override
     @Transactional
     public List<User> selectExamineList(User user)
@@ -114,6 +117,7 @@ public class UserServiceImpl implements IUserService
         return users;
     }
 
+    /**注册用户*/
     @Override
     @Transactional
     public List<UserDto> selectRegisteredList(UserDto userDto)

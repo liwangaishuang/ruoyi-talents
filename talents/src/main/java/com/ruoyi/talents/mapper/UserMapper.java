@@ -32,12 +32,16 @@ public interface UserMapper
      */
     public List<User> selectUserList(User user);
 
+    /**查询人才专家库列表*/
     public List<User> selectSpecialistList(User user);
 
+    /**查询人才移除管理列表*/
     public List<User> selectRemoveList(User user);
 
+    /**查询人才申报审批列表*/
     public List<User> selectExamineList(User user);
 
+    /**注册用户*/
     public List<UserDto> selectRegisteredList(UserDto userDto);
 
     /**
