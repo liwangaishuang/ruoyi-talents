@@ -54,6 +54,14 @@ public class UserDto
     @Excel(name = "帐号状态")
     private String status;
 
+    /** 身份证号码 */
+    @Excel(name = "身份证号码")
+    private String userIdNumber;
+
+    /** 单位地址 */
+    @Excel(name = "单位地址")
+    private String companySite;
+
 
 
 

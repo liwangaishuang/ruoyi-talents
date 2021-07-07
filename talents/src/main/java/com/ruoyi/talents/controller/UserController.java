@@ -1,6 +1,8 @@
 package com.ruoyi.talents.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
@@ -159,6 +161,44 @@ public class UserController extends BaseController
     public AjaxResult edit(@RequestBody User user)
     {
         return toAjax(userService.updateUser(user));
+    }
+
+    /**
+     * 注册用户审批
+     */
+    @Log(title = "注册用户审批", businessType = BusinessType.UPDATE)
+    @PutMapping(value = "/examine")
+    @ApiOperation(httpMethod = "PUT",value = "修改用户")
+    public AjaxResult examineUser(@RequestBody Map map)
+    {
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("id",map.get("id"));
+        hashMap.put("examineStatus",map.get("examineStatus"));
+        hashMap.put("auditExplain",map.get("auditExplain"));
+        System.out.println(hashMap);
+        return toAjax(userService.examineUser(hashMap));
+    }
+
+    /**
+     * 移除专家库
+     */
+    @Log(title = "移除专家库", businessType = BusinessType.UPDATE)
+    @PutMapping(value = "/remove")
+    @ApiOperation(httpMethod = "PUT",value = "移除专家库")
+    public AjaxResult removeUser(@PathVariable("id") String id)
+    {
+        return toAjax(userService.updateUserById(id));
+    }
+
+    /**
+     * 移回专家库
+     */
+    @Log(title = "移回专家库", businessType = BusinessType.UPDATE)
+    @PutMapping(value = "/retract/{id}")
+    @ApiOperation(httpMethod = "PUT",value = "移回专家库")
+    public AjaxResult retractUser(@PathVariable("id") String id)
+    {
+        return toAjax(userService.retractUserById(id));
     }
 
     /**

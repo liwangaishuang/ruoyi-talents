@@ -2,6 +2,7 @@ package com.ruoyi.talents.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
@@ -50,7 +51,6 @@ public class UserServiceImpl implements IUserService
     public User selectUserById(String id)
     {
         User user = setUser(userMapper.selectUserById(id));
-        setUser(user);
         return user;
     }
 
@@ -163,6 +163,31 @@ public class UserServiceImpl implements IUserService
 
         user.setUpdateTime(DateUtils.getNowDate());
         return userMapper.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public int examineUser(Map map)
+    {   map.put("updateTime",DateUtils.getNowDate());
+        if (ObjectUtils.isEmpty(map.get("id"))){
+            return 0;
+        }
+        return userMapper.examineUser(map);
+    }
+
+    @Override
+    @Transactional
+    public int updateUserById(String id)
+    {
+        return 1;
+        //return userMapper.updateUserById(id);
+    }
+
+    @Override
+    @Transactional
+    public int retractUserById(String id)
+    {
+        return userMapper.retractUserById(id,new Date());
     }
 
     @Override

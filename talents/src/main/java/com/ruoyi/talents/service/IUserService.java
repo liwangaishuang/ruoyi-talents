@@ -1,6 +1,7 @@
 package com.ruoyi.talents.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.talents.domain.User;
@@ -54,6 +55,16 @@ public interface IUserService
      */
     public int updateUser(User user);
 
+    /**审核*/
+    public int examineUser(Map map);
+
+    /**移除专家库*/
+    public int updateUserById(String id);
+
+    /**移回专家库*/
+    public int retractUserById(String id);
+
+    /**修改用户密码*/
     public int editPassword(SysUser sysUser);
 
     /**

@@ -83,6 +83,8 @@
         <result property="companyType"    column="company_type"    />
         <result property="phoneNumber"    column="phonenumber"    />
         <result property="status"    column="status"    />
+        <result property="userIdNumber"    column="user_id_number"    />
+        <result property="companySite"    column="company_site"    />
     </resultMap>
 
     <sql id="selectUserVo">
@@ -378,7 +380,7 @@
     </select>
 
     <select id="selectRegisteredList" parameterType="UserDto" resultMap="RegisteredResult">
-        select su.user_id,su.user_name,su.nick_name,u.company_name,u.company_region,u.company_type,su.phonenumber,su.status
+        select su.user_id,su.user_name,su.nick_name,u.company_name,u.company_region,u.company_type,u.user_id_number,u.company_site,su.phonenumber,su.status
         from (select u1.*
         from user u1,(select user_id,max(create_time) time from user group by user_id) u2
         where u1.user_id=u2.user_id and u1.create_time=u2.time) u, sys_user su
@@ -389,6 +391,8 @@
         <if test="companyRegion != null  and companyRegion != ''"> and u.company_region = #{companyRegion}</if>
         <if test="companyType != null  and companyType != ''"> and u.company_type = #{companyType}</if>
         <if test="status != null  and status != ''"> and su.status = #{status}</if>
+        <if test="userIdNumber != null  and userIdNumber != ''"> and su.user_id_number = #{userIdNumber}</if>
+        <if test="companySite != null  and companySite != ''"> and su.company_site = #{companySite}</if>
     </select>
 
     <select id="selectUserById" parameterType="String" resultMap="UserResult">
@@ -597,7 +601,7 @@
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="status != null">status = #{status},</if>
-            <if test="examineStatus != null">examine_tatus = #{examineStatus},</if>
+            <if test="examineStatus != null">examine_status = #{examineStatus},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
             <if test="actYear != null">act_year = #{actYear},</if>
@@ -606,6 +610,31 @@
             <if test="removeOverTime != null">remove_over_time = #{removeOverTime},</if>
             <if test="removeCause != null">remove_cause = #{removeCause},</if>
         </trim>
+        where id = #{id}
+    </update>
+
+    <update id="examineUser" parameterType="Map">
+        update user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="examineStatus != null">examine_status = #{examineStatus},</if>
+            <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
+        </trim>
+        where id in
+        <foreach collection="id" item="item"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!--<update id="updateUser" parameterType="User">
+        update user
+        set
+        where id = #{id}
+    </update>-->
+
+    <update id="retractUserById">
+        update user
+        set is_remove=0,update_time = #{updateTime}
         where id = #{id}
     </update>
 
