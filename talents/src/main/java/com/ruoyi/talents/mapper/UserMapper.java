@@ -63,10 +63,11 @@ public interface UserMapper
     /**审批*/
     public int examineUser(Map map);
 
-    //public int updateUserById(String id);
+    /**移除专家库*/
+    public int removeUser(Map map);
 
     /**移回专家库*/
-    public int retractUserById(@Param(value = "id") String id,@Param(value = "updateTime") Date updateTime);
+    public int retractUserById(@Param(value = "ids") Long[] ids,@Param(value = "updateTime") Date updateTime);
 
     /**修改用户密码*/
     public int editPassword(@Param(value = "userId") String userId,@Param(value = "password") String password,@Param(value = "updateTime") Date updateTime);

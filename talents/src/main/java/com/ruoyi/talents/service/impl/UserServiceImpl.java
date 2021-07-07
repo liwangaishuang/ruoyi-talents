@@ -1,5 +1,7 @@
 package com.ruoyi.talents.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -186,18 +188,25 @@ public class UserServiceImpl implements IUserService
     /**移除专家库*/
     @Override
     @Transactional
-    public int updateUserById(String id)
+    public int removeUser(Map map)
     {
-        return 1;
-        //return userMapper.updateUserById(id);
+        if("0".equals(map.get("removeType"))){
+            map.put("removeOverTime","永久移除");
+        }else {
+            String removeOverTime = ((String) map.get("removeOverTime")).substring(0, 10);
+            map.put("removeOverTime",removeOverTime);
+        }
+        map.put("isRemove","1");
+        map.put("removeTime",new Date());
+        return userMapper.removeUser(map);
     }
 
     /**移回专家库*/
     @Override
     @Transactional
-    public int retractUserById(String id)
+    public int retractUserById(Long[] ids)
     {
-        return userMapper.retractUserById(id,new Date());
+        return userMapper.retractUserById(ids,new Date());
     }
 
     /**修改用户密码*/

@@ -629,16 +629,28 @@
         </foreach>
     </update>
 
-    <!--<update id="updateUser" parameterType="User">
+    <update id="removeUser" parameterType="Map">
         update user
-        set
-        where id = #{id}
-    </update>-->
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="removeCause != null">remove_cause = #{removeCause},</if>
+            <if test="removeOverTime != null">remove_over_time = #{removeOverTime},</if>
+            <if test="isRemove != null">is_remove = #{isRemove},</if>
+            <if test="removeTime != null">remove_time = #{removeTime},</if>
+        </trim>
+        where id in
+        <foreach collection="id" item="item"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
     <update id="retractUserById">
         update user
         set is_remove=0,update_time = #{updateTime}
-        where id = #{id}
+        where id in
+        <foreach collection="ids" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
     <update id="editPassword">

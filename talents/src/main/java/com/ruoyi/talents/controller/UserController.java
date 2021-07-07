@@ -184,20 +184,20 @@ public class UserController extends BaseController
     @Log(title = "移除专家库", businessType = BusinessType.UPDATE)
     @PutMapping(value = "/remove")
     @ApiOperation(httpMethod = "PUT",value = "移除专家库")
-    public AjaxResult removeUser(@PathVariable("id") String id)
+    public AjaxResult removeUser(@RequestBody Map map)
     {
-        return toAjax(userService.updateUserById(id));
+        return toAjax(userService.removeUser(map));
     }
 
     /**
      * 移回专家库
      */
     @Log(title = "移回专家库", businessType = BusinessType.UPDATE)
-    @PutMapping(value = "/retract/{id}")
+    @PutMapping(value = "/retract/{ids}")
     @ApiOperation(httpMethod = "PUT",value = "移回专家库")
-    public AjaxResult retractUser(@PathVariable("id") String id)
+    public AjaxResult retractUser(@PathVariable Long[] ids)
     {
-        return toAjax(userService.retractUserById(id));
+        return toAjax(userService.retractUserById(ids));
     }
 
     /**

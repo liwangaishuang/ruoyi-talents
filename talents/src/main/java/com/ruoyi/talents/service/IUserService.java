@@ -63,10 +63,10 @@ public interface IUserService
     public int examineUser(Map map);
 
     /**移除专家库*/
-    public int updateUserById(String id);
+    public int removeUser(Map map);
 
     /**移回专家库*/
-    public int retractUserById(String id);
+    public int retractUserById(Long[] ids);
 
     /**修改用户密码*/
     public int editPassword(SysUser sysUser);
