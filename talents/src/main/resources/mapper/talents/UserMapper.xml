@@ -619,6 +619,9 @@
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="examineStatus != null">examine_status = #{examineStatus},</if>
             <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
+            <if test="auditTime != null">audit_time = #{auditTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isRemove != null">is_remove = #{isRemove},</if>
         </trim>
         where id in
         <foreach collection="id" item="item"  open="(" separator="," close=")">

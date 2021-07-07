@@ -175,7 +175,6 @@ public class UserController extends BaseController
         hashMap.put("id",map.get("id"));
         hashMap.put("examineStatus",map.get("examineStatus"));
         hashMap.put("auditExplain",map.get("auditExplain"));
-        System.out.println(hashMap);
         return toAjax(userService.examineUser(hashMap));
     }
 

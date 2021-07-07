@@ -169,6 +169,9 @@ public class UserServiceImpl implements IUserService
     @Transactional
     public int examineUser(Map map)
     {   map.put("updateTime",DateUtils.getNowDate());
+        map.put("auditTime",DateUtils.getNowDate());
+        map.put("status","2");
+        map.put("isRemove","0");
         if (ObjectUtils.isEmpty(map.get("id"))){
             return 0;
         }
