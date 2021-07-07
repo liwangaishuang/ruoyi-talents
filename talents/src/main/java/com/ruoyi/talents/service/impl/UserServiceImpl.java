@@ -169,6 +169,7 @@ public class UserServiceImpl implements IUserService
         return userMapper.updateUser(user);
     }
 
+    /**审批*/
     @Override
     @Transactional
     public int examineUser(Map map)
@@ -182,6 +183,7 @@ public class UserServiceImpl implements IUserService
         return userMapper.examineUser(map);
     }
 
+    /**移除专家库*/
     @Override
     @Transactional
     public int updateUserById(String id)
@@ -190,6 +192,7 @@ public class UserServiceImpl implements IUserService
         //return userMapper.updateUserById(id);
     }
 
+    /**移回专家库*/
     @Override
     @Transactional
     public int retractUserById(String id)
@@ -197,6 +200,7 @@ public class UserServiceImpl implements IUserService
         return userMapper.retractUserById(id,new Date());
     }
 
+    /**修改用户密码*/
     @Override
     public int editPassword(SysUser sysUser)
     {   String userId=sysUser.getUserId()+"";

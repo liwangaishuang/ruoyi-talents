@@ -59,7 +59,7 @@ public interface IUserService
      */
     public int updateUser(User user);
 
-    /**审核*/
+    /**审批*/
     public int examineUser(Map map);
 
     /**移除专家库*/
