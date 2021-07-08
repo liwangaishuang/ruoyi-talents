@@ -54,6 +54,10 @@ public class User
     @Excel(name = "年龄")
     private String age;
 
+    private String minAge;
+
+    private String maxAge;
+
     /** 手机号码 */
     @Excel(name = "手机号码")
     private String phoneNumber;
@@ -275,6 +279,10 @@ public class User
     @Excel(name = "担任评审专家最近年度")
     private String actYear;
 
+    private String minActYear;
+
+    private String maxActYear;
+
     /** 是否移除 */
     @Excel(name = "是否移除")
     private String isRemove;
@@ -309,6 +317,12 @@ public class User
     /** 更新时间 */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date minUpdateTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date maxUpdateTime;
 
     /** 备注 */
     private String remark;

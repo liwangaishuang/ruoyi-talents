@@ -69,6 +69,7 @@ public class UserController extends BaseController
     @ApiOperation(httpMethod = "GET",value = "查询人才专家库列表")
     public TableDataInfo specialistList(User user)
     {
+        System.out.println(user);
         startPage();
         List<User> list = userService.selectSpecialistList(user);
         return getDataTable(list);
@@ -81,6 +82,7 @@ public class UserController extends BaseController
     @ApiOperation(httpMethod = "GET",value = "查询人才移除管理列表")
     public TableDataInfo selectRemoveList(User user)
     {
+        System.out.println(user);
         startPage();
         List<User> list = userService.selectRemoveList(user);
         return getDataTable(list);
