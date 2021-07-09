@@ -115,7 +115,7 @@ public class UserController extends BaseController
     /**
      * 导出用户列表
      */
-    @PreAuthorize("@ss.hasPermi('talents:self:export')")
+    @PreAuthorize("@ss.hasPermi('declare:self:export')")
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     @ApiOperation(httpMethod = "GET",value = "导出用户列表")
@@ -129,7 +129,7 @@ public class UserController extends BaseController
     /**
      * 获取用户详细信息
      */
-    @PreAuthorize("@ss.hasPermi('talents:self:query')")
+    @PreAuthorize("@ss.hasPermi('declare:self:query')")
     @GetMapping(value = "/{id}")
     @ApiOperation(httpMethod = "GET",value = "获取用户详细信息")
     public AjaxResult getInfo(@PathVariable("id") String id)
@@ -140,7 +140,7 @@ public class UserController extends BaseController
     /**
      * 新增用户
      */
-    @PreAuthorize("@ss.hasPermi('talents:self:add')")
+    @PreAuthorize("@ss.hasPermi('declare:specialist:add')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
     @ApiOperation(httpMethod = "POST",value = "新增用户")
@@ -156,7 +156,7 @@ public class UserController extends BaseController
     /**
      * 修改用户
      */
-    @PreAuthorize("@ss.hasPermi('talents:self:edit')")
+    @PreAuthorize("@ss.hasPermi('declare:self:edit')")
     @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PutMapping
     @ApiOperation(httpMethod = "PUT",value = "修改用户")

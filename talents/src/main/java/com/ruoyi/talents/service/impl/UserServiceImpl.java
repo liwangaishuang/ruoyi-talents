@@ -13,6 +13,7 @@ import com.ruoyi.talents.domain.UserEducationExperience;
 import com.ruoyi.talents.domain.UserOccupational;
 import com.ruoyi.talents.domain.UserWorkExperience;
 import com.ruoyi.talents.domain.dto.UserDto;
+import com.ruoyi.talents.domain.vo.DistributionVo;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
 import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
@@ -182,6 +183,25 @@ public class UserServiceImpl implements IUserService
         if (ObjectUtils.isEmpty(map.get("id"))){
             return 0;
         }
+        /**当该用户审批通过时，则判断该用户是否已在人才专家库，如果在则更新该用户的数据*/
+        /**如果审批通过*/
+        if ("0".equals(map.get("examineStatus"))){
+            /**因可能有多个用户同时通过，所以需要循环*/
+            List<String> ids = (List)map.get("id");
+            for (String id: ids) {
+                User user = userMapper.selectUserById(id);
+                /**得到该用户id和userId*/
+                Long newId = user.getId();
+                String userId = user.getUserId();
+                Long earlierId = userMapper.getEarlierUser(userId);
+                user.setId(earlierId);
+                /**把新的填报数据更新到旧数据*/
+                userMapper.updateUser(user);
+                /**删除新数据*/
+                userMapper.deleteUserById(newId);
+            }
+        }
+
         return userMapper.examineUser(map);
     }
 
@@ -257,6 +277,16 @@ public class UserServiceImpl implements IUserService
 
         return userMapper.deleteUserById(id);
     }
+
+    /**申报数据统计*/
+    @Override
+    public Map statisticsList() {
+        Map map = userMapper.statisticsList();
+        List<DistributionVo> voList = userMapper.distributionList();
+        map.put("distribution",voList);
+        return map;
+    }
+
 
     public User setUser(User user){
         /**先查询user相关表*/

@@ -86,4 +86,20 @@ public interface IUserService
      * @return 结果
      */
     public int deleteUserById(Long id);
+
+    /**申报数据统计*/
+    public Map statisticsList();
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

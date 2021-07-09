@@ -406,6 +406,11 @@
         where id = #{id}
     </select>
 
+    <select id="getEarlierUser" parameterType="String" resultType="String">
+        select id from user
+        where user_id=1 order by create_time limit 1
+    </select>
+
     <insert id="insertUser" parameterType="User"  useGeneratedKeys="true" keyProperty="id">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -678,4 +683,44 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="statisticsList" resultType="Map">
+        select
+        (select count(1) from (select count(1) from user where 1=1 and status in (2) and examine_status=0 and is_remove=0 group by user_id) a) sumPeople,
+        (select count(1) from (select count(1)  from user group by company_name) a) sunCompany,
+        (select count(1) from sys_user where dept_id=102) sumRegistered
+        from dual;
+    </select>
+
+    <select id="distributionList" resultType="distributionVo">
+        SELECT
+        '人才专家' AS type,
+        SUM(CASE WHEN dwell_region = 1 THEN 1 ELSE 0 END) AS 'ft',
+        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lh',
+        SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
+        SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lh',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lg',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'dp',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'yt',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'ps',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'gm',
+        SUM(CASE WHEN dwell_region = null THEN 1 ELSE 0 END) AS 'qt'
+        FROM user
+        union
+        SELECT
+        '企业' AS type,
+        SUM(CASE WHEN company_region = 1 THEN 1 ELSE 0 END) AS 'ft',
+        SUM(CASE WHEN company_region = 2 THEN 1 ELSE 0 END) AS 'lh',
+        SUM(CASE WHEN company_region = 3 THEN 1 ELSE 0 END) AS 'ns',
+        SUM(CASE WHEN company_region = 4 THEN 1 ELSE 0 END) AS 'ba',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'lh',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'lg',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'dp',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'yt',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'ps',
+        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'gm',
+        SUM(CASE WHEN company_region = null THEN 1 ELSE 0 END) AS 'qt'
+        FROM user;
+    </select>
 </mapper>
