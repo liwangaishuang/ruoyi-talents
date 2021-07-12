@@ -2,9 +2,7 @@ package com.ruoyi.talents.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
@@ -282,11 +280,44 @@ public class UserServiceImpl implements IUserService
     @Override
     public Map statisticsList() {
         Map map = userMapper.statisticsList();
-        List<DistributionVo> voList = userMapper.distributionList();
-        map.put("distribution",voList);
         return map;
     }
 
+    /**人才/企业区域分布*/
+    @Override
+    public List<DistributionVo> distributionList() {
+        return userMapper.distributionList();
+    }
+
+    /**年龄与性别分布*/
+    @Override
+    public Map ageAndSexList() {
+        HashMap<String, Map> map = new HashMap<>();
+        map.put("sex",userMapper.sexMap());
+        map.put("age",userMapper.ageMap());
+        return map;
+    }
+
+    /**学历分布和专业类别*/
+    @Override
+    public Map specialityAndEducationMap() {
+        HashMap<String, Map> map = new HashMap<>();
+        map.put("speciality",userMapper.specialityMap());
+        map.put("education",userMapper.educationMap());
+        return map;
+    }
+
+    /**申报趋势*/
+    @Override
+    public List trendList(int isMonth) {
+        /**0:月度 1:年度*/
+        if (isMonth==0){
+            return userMapper.trendMonth();
+        }else if(isMonth==1){
+            return userMapper.trendYear();
+        }
+        return null;
+    }
 
     public User setUser(User user){
         /**先查询user相关表*/

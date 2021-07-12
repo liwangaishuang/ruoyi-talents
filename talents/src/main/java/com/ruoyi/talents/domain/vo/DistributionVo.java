@@ -45,6 +45,9 @@ public class DistributionVo {
     @ApiModelProperty(value = "光明")
     private String gm;
 
+    @ApiModelProperty(value = "深汕")
+    private String ss;
+
     @ApiModelProperty(value = "其他")
     private String qt;
 

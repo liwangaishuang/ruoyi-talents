@@ -140,7 +140,7 @@ public class UserController extends BaseController
     /**
      * 新增用户
      */
-    @PreAuthorize("@ss.hasPermi('declare:specialist:add')")
+    @PreAuthorize("@ss.hasRole('declare')")
     @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping
     @ApiOperation(httpMethod = "POST",value = "新增用户")

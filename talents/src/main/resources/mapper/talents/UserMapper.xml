@@ -696,31 +696,87 @@
         SELECT
         '人才专家' AS type,
         SUM(CASE WHEN dwell_region = 1 THEN 1 ELSE 0 END) AS 'ft',
-        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lh',
+        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
         SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
         SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lh',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lg',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'dp',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'yt',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'ps',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'gm',
-        SUM(CASE WHEN dwell_region = null THEN 1 ELSE 0 END) AS 'qt'
-        FROM user
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
+        SUM(CASE WHEN dwell_region = 6 THEN 1 ELSE 0 END) AS 'lg',
+        SUM(CASE WHEN dwell_region = 7 THEN 1 ELSE 0 END) AS 'dp',
+        SUM(CASE WHEN dwell_region = 8 THEN 1 ELSE 0 END) AS 'yt',
+        SUM(CASE WHEN dwell_region = 9 THEN 1 ELSE 0 END) AS 'ps',
+        SUM(CASE WHEN dwell_region = 10 THEN 1 ELSE 0 END) AS 'gm',
+        SUM(CASE WHEN dwell_region = 11 THEN 1 ELSE 0 END) AS 'ss',
+        SUM(CASE WHEN dwell_region = 12 THEN 1 ELSE 0 END) AS 'qt'
+        FROM user where status=2 and examine_status=0 and is_remove=0
         union
         SELECT
         '企业' AS type,
         SUM(CASE WHEN company_region = 1 THEN 1 ELSE 0 END) AS 'ft',
-        SUM(CASE WHEN company_region = 2 THEN 1 ELSE 0 END) AS 'lh',
-        SUM(CASE WHEN company_region = 3 THEN 1 ELSE 0 END) AS 'ns',
-        SUM(CASE WHEN company_region = 4 THEN 1 ELSE 0 END) AS 'ba',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'lh',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'lg',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'dp',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'yt',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'ps',
-        SUM(CASE WHEN company_region = 5 THEN 1 ELSE 0 END) AS 'gm',
-        SUM(CASE WHEN company_region = null THEN 1 ELSE 0 END) AS 'qt'
-        FROM user;
+        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
+        SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
+        SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
+        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
+        SUM(CASE WHEN company_region = 6 THEN 1 ELSE 0 END) AS 'lg',
+        SUM(CASE WHEN company_region = 7 THEN 1 ELSE 0 END) AS 'dp',
+        SUM(CASE WHEN company_region = 8 THEN 1 ELSE 0 END) AS 'yt',
+        SUM(CASE WHEN company_region = 9 THEN 1 ELSE 0 END) AS 'ps',
+        SUM(CASE WHEN company_region = 10 THEN 1 ELSE 0 END) AS 'gm',
+        SUM(CASE WHEN company_region = 11 THEN 1 ELSE 0 END) AS 'ss',
+        SUM(CASE WHEN company_region = 12 THEN 1 ELSE 0 END) AS 'qt'
+        FROM user where status=2 and examine_status=0 and is_remove=0
+    </select>
+
+    <select id="sexMap" resultType="Map">
+        select
+        SUM(CASE WHEN user_sex=0 THEN 1 ELSE 0 END) AS man,
+        SUM(CASE WHEN user_sex=1 THEN 1 ELSE 0 END) AS women
+        from user
+        where status=2 and examine_status=0 and is_remove=0;
+    </select>
+
+    <select id="ageMap" resultType="Map">
+        select
+        SUM(CASE WHEN age &lt;30 THEN 1 ELSE 0 END) AS '1',
+        SUM(CASE WHEN age>=30 and age &lt;40 THEN 1 ELSE 0 END) AS '2',
+        SUM(CASE WHEN age>=40 and age &lt;50 THEN 1 ELSE 0 END) AS '3',
+        SUM(CASE WHEN age>=50 and age &lt;65 THEN 1 ELSE 0 END) AS '4',
+        SUM(CASE WHEN age>=65 THEN 1 ELSE 0 END) AS '5'
+        from user
+        where status=2 and examine_status=0 and is_remove=0;
+    </select>
+
+    <select id="specialityMap" resultType="Map">
+        select
+        SUM(CASE WHEN specialty_type =1 THEN 1 ELSE 0 END) AS 'professional',
+        SUM(CASE WHEN specialty_type =2 THEN 1 ELSE 0 END) AS 'hr'
+        from user
+        where status=2 and examine_status=0 and is_remove=0
+    </select>
+
+    <select id="educationMap" resultType="Map">
+        select
+        SUM(CASE WHEN highest_education =1 THEN 1 ELSE 0 END) AS 'doctor',
+        SUM(CASE WHEN highest_education =2 THEN 1 ELSE 0 END) AS 'master',
+        SUM(CASE WHEN highest_education =3 THEN 1 ELSE 0 END) AS 'college',
+        SUM(CASE WHEN highest_education =4 THEN 1 ELSE 0 END) AS 'junior',
+        SUM(CASE WHEN highest_education =5 THEN 1 ELSE 0 END) AS 'else'
+        from user
+        where status=2 and examine_status=0 and is_remove=0;
+    </select>
+
+    <select id="trendMonth" resultType="Map">
+        select *
+        from (select month(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
+        from user
+        where status=2 and examine_status=0 and is_remove=0
+        group by month(create_time))a
+    </select>
+
+    <select id="trendYear" resultType="Map">
+        select *
+        from (select year(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
+        from user
+        where status=2 and examine_status=0 and is_remove=0
+        group by year(create_time))a
     </select>
 </mapper>

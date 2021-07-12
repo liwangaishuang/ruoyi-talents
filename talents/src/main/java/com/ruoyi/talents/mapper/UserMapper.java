@@ -92,7 +92,26 @@ public interface UserMapper
      */
     public int deleteUserByIds(Long[] ids);
 
+    /**申报数据统计*/
     public Map statisticsList();
 
+    /**人才/企业区域分布*/
     public List<DistributionVo> distributionList();
+
+    /**性别分布*/
+    public Map sexMap();
+
+    /**年龄分布*/
+    public Map ageMap();
+
+    /**专业类别*/
+    public Map specialityMap();
+
+    /**学历分布*/
+    public Map educationMap();
+
+    /**申报趋势*/
+    public List trendMonth();
+
+    public List trendYear();
 }

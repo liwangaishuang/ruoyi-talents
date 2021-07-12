@@ -1,11 +1,13 @@
 package com.ruoyi.talents.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
+import com.ruoyi.talents.domain.vo.DistributionVo;
 
 /**
  * 用户Service接口
@@ -89,6 +91,18 @@ public interface IUserService
 
     /**申报数据统计*/
     public Map statisticsList();
+
+    /**人才/企业区域分布*/
+    public List<DistributionVo> distributionList();
+
+    /**年龄与性别分布*/
+    public Map ageAndSexList();
+
+    /**学历分布和专业类别*/
+    public Map specialityAndEducationMap();
+
+    /**申报趋势*/
+    public List trendList(int isMonth);
 
 
 
