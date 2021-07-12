@@ -28,6 +28,9 @@ public interface UserMapper
     /**该用户更早的填报数据*/
     public Long getEarlierUser(String id);
 
+    /**查询有几条相同userId的数据*/
+    public Long getUserNumber(String id);
+
     /**
      * 查询用户列表
      *
@@ -64,8 +67,14 @@ public interface UserMapper
      */
     public int updateUser(User user);
 
+    /**修改用户id*/
+    public int updateUserById(@Param(value = "formerId")Long formerId,@Param(value = "newId")Long newId);
+
     /**审批*/
     public int examineUser(Map map);
+
+    /**单个审批*/
+    public int examineOneUser(Map map);
 
     /**移除专家库*/
     public int removeUser(Map map);

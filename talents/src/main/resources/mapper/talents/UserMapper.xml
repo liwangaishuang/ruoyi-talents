@@ -406,9 +406,14 @@
         where id = #{id}
     </select>
 
-    <select id="getEarlierUser" parameterType="String" resultType="String">
+    <select id="getEarlierUser" parameterType="String" resultType="Long">
         select id from user
-        where user_id=1 order by create_time limit 1
+        where user_id=#{id} order by create_time limit 1
+    </select>
+
+    <select id="getUserNumber" parameterType="String" resultType="Long">
+        select count(1) from user
+        where user_id=#{id}
     </select>
 
     <insert id="insertUser" parameterType="User"  useGeneratedKeys="true" keyProperty="id">
@@ -640,6 +645,19 @@
         </foreach>
     </update>
 
+    <update id="examineOneUser" parameterType="Map">
+        update user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="examineStatus != null">examine_status = #{examineStatus},</if>
+            <if test="auditExplain != null">audit_explain = #{auditExplain},</if>
+            <if test="auditTime != null">audit_time = #{auditTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isRemove != null">is_remove = #{isRemove},</if>
+        </trim>
+        where id =#{id}
+    </update>
+
     <update id="removeUser" parameterType="Map">
         update user
         <trim prefix="SET" suffixOverrides=",">
@@ -673,9 +691,13 @@
         where user_id = #{userId}
     </update>
 
-    <delete id="deleteUserById" parameterType="String">
-        delete from user where id = #{id}
+    <delete id="deleteUserById" parameterType="Long">
+        delete from user where id=#{id}
     </delete>
+
+    <update id="updateUserById" parameterType="Long">
+        update user set id=#{formerId} where id=#{newId}
+    </update>
 
     <delete id="deleteUserByIds" parameterType="Long">
         delete from user where id in

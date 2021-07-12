@@ -1,27 +1,25 @@
 package com.ruoyi.talents.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.talents.domain.UserEducationExperience;
-import com.ruoyi.talents.domain.UserOccupational;
-import com.ruoyi.talents.domain.UserWorkExperience;
+import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
+import com.ruoyi.talents.mapper.UserMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
 import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
+import com.ruoyi.talents.service.IUserService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.talents.mapper.UserMapper;
-import com.ruoyi.talents.domain.User;
-import com.ruoyi.talents.service.IUserService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户Service业务层处理
@@ -173,8 +171,8 @@ public class UserServiceImpl implements IUserService
     /**审批*/
     @Override
     @Transactional
-    public int examineUser(Map map)
-    {   map.put("updateTime",DateUtils.getNowDate());
+    public int examineUser(Map map) {
+        map.put("updateTime",DateUtils.getNowDate());
         map.put("auditTime",DateUtils.getNowDate());
         map.put("status","2");
         map.put("isRemove","0");
@@ -185,19 +183,30 @@ public class UserServiceImpl implements IUserService
         /**如果审批通过*/
         if ("0".equals(map.get("examineStatus"))){
             /**因可能有多个用户同时通过，所以需要循环*/
-            List<String> ids = (List)map.get("id");
-            for (String id: ids) {
-                User user = userMapper.selectUserById(id);
-                /**得到该用户id和userId*/
-                Long newId = user.getId();
+            List<Integer> ids = (List)map.get("id");
+            for (Integer id: ids) {
+                User user = userMapper.selectUserById(id+"");
                 String userId = user.getUserId();
-                Long earlierId = userMapper.getEarlierUser(userId);
-                user.setId(earlierId);
-                /**把新的填报数据更新到旧数据*/
-                userMapper.updateUser(user);
-                /**删除新数据*/
-                userMapper.deleteUserById(newId);
+                /**查询相同userId的数据共有几条*/
+                Long number = userMapper.getUserNumber(userId);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("id",id);
+                if (number>1){
+                    Long earlierId = userMapper.getEarlierUser(userId);
+                    /**删除旧数据，把旧id给新数据,id给完把审核结果放入数据中*/
+                    userMapper.deleteUserById(earlierId);
+                    userMapper.updateUserById(earlierId,id.longValue());
+                    hashMap.put("id",earlierId);
+                }
+                hashMap.put("updateTime",DateUtils.getNowDate());
+                hashMap.put("auditTime",DateUtils.getNowDate());
+                hashMap.put("status","2");
+                hashMap.put("isRemove","0");
+                hashMap.put("examineStatus",map.get("examineStatus"));
+                hashMap.put("auditExplain",map.get("auditExplain"));
+                userMapper.examineOneUser(hashMap);
             }
+            return ids.size();
         }
 
         return userMapper.examineUser(map);
