@@ -121,6 +121,10 @@ public interface UserMapper
 
     /**申报趋势*/
     public List trendMonth();
-
     public List trendYear();
+
+    /**单位类别*/
+    public List companyType(String type);
+
+
 }

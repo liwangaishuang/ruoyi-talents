@@ -328,6 +328,12 @@ public class UserServiceImpl implements IUserService
         return null;
     }
 
+    /**单位类别*/
+    @Override
+    public List companyType(String type) {
+        return userMapper.companyType(type);
+    }
+
     public User setUser(User user){
         /**先查询user相关表*/
         if (ObjectUtils.isNotEmpty(user)){

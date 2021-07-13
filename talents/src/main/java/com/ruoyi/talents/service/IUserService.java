@@ -104,6 +104,11 @@ public interface IUserService
     /**申报趋势*/
     public List trendList(int isMonth);
 
+    /**
+     单位类别
+     */
+    public List companyType(String type);
+
 
 
 

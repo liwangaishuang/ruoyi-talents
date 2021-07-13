@@ -78,6 +78,17 @@ public class HomeController extends BaseController
         return userService.trendList(isMonth);
     }
 
+    /**
+     * 单位类别
+     */
+    @GetMapping("/companyType")
+    @ApiOperation(httpMethod = "GET",value = "单位类别")
+    @ApiImplicitParam(name = "type",value = "",dataType = "int")
+    public List companyType(String type) {
+        return userService.companyType(type);
+    }
+
+
 
 
 }

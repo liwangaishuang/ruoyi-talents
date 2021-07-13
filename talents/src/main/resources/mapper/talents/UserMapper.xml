@@ -787,11 +787,18 @@
     </select>
 
     <select id="trendMonth" resultType="Map">
-        select *
-        from (select month(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
+        select t1.xc time,ifnull(t2.peopleSum,0) peopleSum,ifnull(t2.companySum,0) companySum
+        from
+        (SELECT @xi:=@xi+1 as xc from
+        (SELECT 1 UNION SELECT 2 ) xc1,
+        (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 ) xc2,
+        (SELECT @xi:=0) xc0) t1
+        left join
+        (select month(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
         from user
         where status=2 and examine_status=0 and is_remove=0
-        group by month(create_time))a
+        group by month(create_time)) t2
+        on t1.xc=t2.time
     </select>
 
     <select id="trendYear" resultType="Map">
@@ -800,5 +807,20 @@
         from user
         where status=2 and examine_status=0 and is_remove=0
         group by year(create_time))a
+    </select>
+
+    <select id="companyType" resultType="Map">
+        select t1.xc type,ifnull(t2.peopleNumber,0) peopleNumber,ifnull(companySum,0) companySum
+        from
+        (SELECT @xi:=@xi+1 as xc from
+        (SELECT 1 UNION SELECT 2 ) xc1,
+        (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7) xc2,
+        (SELECT @xi:=0) xc0) t1
+        left join (select company_type companyType,count(1) peopleNumber,count(DISTINCT company_name) companySum
+        from user
+        where status=2 and examine_status=0 and is_remove=0
+        <if test="type != null and type!=''"> and company_region = #{type}</if>
+        group by company_type) t2
+        on t1.xc=t2.companyType
     </select>
 </mapper>
