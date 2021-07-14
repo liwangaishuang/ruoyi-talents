@@ -17,7 +17,7 @@ public interface UserOccupationalMapper
      * @param id 用户职业资格ID
      * @return 用户职业资格
      */
-    public UserOccupational selectUserOccupationalById(Long id);
+    public List<UserOccupational> selectUserOccupationalById(Long id);
 
     /**
      * 查询用户职业资格列表

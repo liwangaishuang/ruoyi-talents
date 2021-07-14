@@ -6,6 +6,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 user
@@ -252,15 +253,15 @@ public class User
 
     /** 用户教育经历对象 */
     @Excel(name = "用户教育经历对象")
-    private UserEducationExperience experience;
+    private List<UserEducationExperience> experience;
 
     /** 用户职业资格对象 */
     @Excel(name = "用户职业资格对象")
-    private UserOccupational occupational;
+    private List<UserOccupational> occupational;
 
     /** 用户工作经历对象 */
     @Excel(name = "用户工作经历对象")
-    private UserWorkExperience workExperience;
+    private List<UserWorkExperience> workExperience;
 
     /** 审批结果(0:通过 1:不通过) */
     @Excel(name = "审批结果(0:通过 1:不通过)")

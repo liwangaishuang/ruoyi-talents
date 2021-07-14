@@ -17,7 +17,7 @@ public interface UserWorkExperienceMapper
      * @param id 用户工作经历ID
      * @return 用户工作经历
      */
-    public UserWorkExperience selectUserWorkExperienceById(Long id);
+    public List<UserWorkExperience> selectUserWorkExperienceById(Long id);
 
     /**
      * 查询用户工作经历列表

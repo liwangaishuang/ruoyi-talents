@@ -17,7 +17,7 @@ public interface UserEducationExperienceMapper
      * @param id 用户教育经历ID
      * @return 用户教育经历
      */
-    public UserEducationExperience selectUserEducationExperienceById(Long id);
+    public List<UserEducationExperience> selectUserEducationExperienceById(Long id);
 
     /**
      * 查询用户教育经历列表

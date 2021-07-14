@@ -4,6 +4,9 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.talents.domain.User;
+import com.ruoyi.talents.domain.UserEducationExperience;
+import com.ruoyi.talents.domain.UserOccupational;
+import com.ruoyi.talents.domain.UserWorkExperience;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
@@ -137,13 +140,19 @@ public class UserServiceImpl implements IUserService
     {
         /**先插入user相关表*/
         if (ObjectUtils.isNotEmpty(user.getExperience())){
-            educationExperienceMapper.insertUserEducationExperience(user.getExperience());
+            for (UserEducationExperience experience : user.getExperience()) {
+                educationExperienceMapper.insertUserEducationExperience(experience);
+            }
         }
         if (ObjectUtils.isNotEmpty(user.getWorkExperience())){
-            workExperienceMapper.insertUserWorkExperience(user.getWorkExperience());
+            for (UserWorkExperience workExperience : user.getWorkExperience()) {
+                workExperienceMapper.insertUserWorkExperience(workExperience);
+            }
         }
         if(ObjectUtils.isNotEmpty(user.getOccupational())){
-            occupationalMapper.insertUserOccupational(user.getOccupational());
+            for (UserOccupational occupational : user.getOccupational()) {
+                occupationalMapper.insertUserOccupational(occupational);
+            }
         }
         user.setCreateTime(DateUtils.getNowDate());
         return userMapper.insertUser(user);
@@ -160,9 +169,15 @@ public class UserServiceImpl implements IUserService
     public int updateUser(User user)
     {
         /**先修改user相关表*/
-        educationExperienceMapper.updateUserEducationExperience(user.getExperience());
-        workExperienceMapper.updateUserWorkExperience(user.getWorkExperience());
-        occupationalMapper.updateUserOccupational(user.getOccupational());
+        for (UserEducationExperience experience : user.getExperience()) {
+            educationExperienceMapper.updateUserEducationExperience(experience);
+        }
+        for (UserWorkExperience workExperience : user.getWorkExperience()) {
+            workExperienceMapper.updateUserWorkExperience(workExperience);
+        }
+        for (UserOccupational occupational : user.getOccupational()) {
+            occupationalMapper.updateUserOccupational(occupational);
+        }
 
         user.setUpdateTime(DateUtils.getNowDate());
         return userMapper.updateUser(user);
