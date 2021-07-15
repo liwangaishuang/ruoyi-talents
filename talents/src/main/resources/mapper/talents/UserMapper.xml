@@ -406,6 +406,14 @@
         where id = #{id}
     </select>
 
+    <select id="getNewestInfo" parameterType="String" resultType="NewestUserVo">
+        select status,examine_status,is_remove
+        from user
+        where user_id=#{userId}
+        order by create_time desc
+        limit 1
+    </select>
+
     <select id="getEarlierUser" parameterType="String" resultType="Long">
         select id from user
         where user_id=#{id} order by create_time limit 1

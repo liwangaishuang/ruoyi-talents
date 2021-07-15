@@ -7,6 +7,7 @@ import java.util.Map;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.NewestUserVo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -24,6 +25,8 @@ public interface UserMapper
      * @return 用户
      */
     public User selectUserById(String id);
+
+    public NewestUserVo getNewestInfo(String id);
 
     /**该用户更早的填报数据*/
     public Long getEarlierUser(String id);

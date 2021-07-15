@@ -8,6 +8,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.NewestUserVo;
 
 /**
  * 用户Service接口
@@ -24,6 +25,8 @@ public interface IUserService
      * @return 用户
      */
     public User selectUserById(String id);
+
+    public NewestUserVo getNewestInfo();
 
     /**
      * 查询用户列表

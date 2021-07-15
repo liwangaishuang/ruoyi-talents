@@ -1,6 +1,7 @@
 package com.ruoyi.talents.service.impl;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.talents.domain.User;
@@ -9,6 +10,7 @@ import com.ruoyi.talents.domain.UserOccupational;
 import com.ruoyi.talents.domain.UserWorkExperience;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.NewestUserVo;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
@@ -54,6 +56,17 @@ public class UserServiceImpl implements IUserService
     {
         User user = setUser(userMapper.selectUserById(id));
         return user;
+    }
+
+    @Override
+    public NewestUserVo getNewestInfo() {
+        String id = SecurityUtils.getLoginUser().getUser().getUserId()+"";
+        NewestUserVo info = userMapper.getNewestInfo(id);
+        /**判断该用户处于什么状态*/
+        /*if (){
+
+        }*/
+        return info;
     }
 
     /**

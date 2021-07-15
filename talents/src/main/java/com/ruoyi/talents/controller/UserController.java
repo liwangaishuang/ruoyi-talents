@@ -129,12 +129,22 @@ public class UserController extends BaseController
     /**
      * 获取用户详细信息
      */
-    @PreAuthorize("@ss.hasPermi('declare:self:query')")
+    @PreAuthorize("@ss.hasRole('declare')")
     @GetMapping(value = "/{id}")
     @ApiOperation(httpMethod = "GET",value = "获取用户详细信息")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(userService.selectUserById(id));
+    }
+
+    /**
+     * 获取用户最近的详细信息
+     */
+    @GetMapping(value = "/newest")
+    @ApiOperation(httpMethod = "GET",value = "获取用户最近的详细信息")
+    public AjaxResult getNewestInfo()
+    {
+        return AjaxResult.success(userService.getNewestInfo());
     }
 
     /**
