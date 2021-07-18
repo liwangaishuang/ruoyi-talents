@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertMultistageDictionary" parameterType="MultistageDictionary" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertMultistageDictionary" parameterType="com.ruoyi.talents.domain.MultistageDictionary" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into multistage_dictionary
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="parentId != null">parent_id,</if>
@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="test" resultMap="MultistageDictionaryResult">
         select * from multistage_dictionary
         where parent_id in (select id from multistage_dictionary
-        where parent_id=(select id from multistage_dictionary where dict_value='专业'))
+        where parent_id=(select id from multistage_dictionary where dict_value='行业领域'))
     </select>
 
     <select id="test2" resultMap="MultistageDictionaryResult">

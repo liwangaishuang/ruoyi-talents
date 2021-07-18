@@ -63,7 +63,7 @@ public class MultistageDictionaryServiceImpl implements IMultistageDictionarySer
      * @return 结果
      */
     @Override
-    public int insertMultistageDictionary(MultistageDictionary multistageDictionary)
+    public Long insertMultistageDictionary(MultistageDictionary multistageDictionary)
     {
         multistageDictionary.setCreateTime(DateUtils.getNowDate());
         return multistageDictionaryMapper.insertMultistageDictionary(multistageDictionary);

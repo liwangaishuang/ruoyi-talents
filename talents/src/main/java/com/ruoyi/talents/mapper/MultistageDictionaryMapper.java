@@ -36,7 +36,7 @@ public interface MultistageDictionaryMapper
      * @param multistageDictionary 多级字典
      * @return 结果
      */
-    public int insertMultistageDictionary(MultistageDictionary multistageDictionary);
+    public Long insertMultistageDictionary(MultistageDictionary multistageDictionary);
 
     /**
      * 修改多级字典
