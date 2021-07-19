@@ -831,4 +831,25 @@
         group by company_type) t2
         on t1.xc=t2.companyType
     </select>
+
+    <select id="companyRegion" resultType="Map">
+        select h1.dict_value dictValue,ifnull(h2.number,0) number from
+          (select * from multistage_dictionary where parent_id=2) h1
+          left join
+          (select u2.mId,u2.dictValue,count(1) number from
+          (select * from user where 1=1
+          <if test="type != null and type !=''"> and company_region = #{type}</if>
+          ) u1,(select t1.id mId,t1.dict_value dictValue,t3.* from
+          (select * from multistage_dictionary where parent_id in
+          (select id from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2))) t3
+          left join
+          (select * from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2)) t2
+          on t3.parent_id=t2.id
+          left join
+          (select * from multistage_dictionary where parent_id=2) t1
+          on t2.parent_id=t1.id) u2
+          where u1.main_industry=u2.id
+          group by u2.mId,u2.dictValue) h2
+          on h1.dict_value=h2.dictValue
+    </select>
 </mapper>

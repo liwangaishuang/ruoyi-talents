@@ -362,6 +362,12 @@ public class UserServiceImpl implements IUserService
         return userMapper.companyType(type);
     }
 
+    /**人才专家行业领域分布*/
+    @Override
+    public List companyRegion(String type) {
+        return userMapper.companyRegion(type);
+    }
+
     public User setUser(User user){
         /**先查询user相关表*/
         if (ObjectUtils.isNotEmpty(user)){

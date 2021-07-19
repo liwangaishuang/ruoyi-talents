@@ -88,6 +88,16 @@ public class HomeController extends BaseController
         return userService.companyType(type);
     }
 
+    /**
+     * 人才专家行业领域分布
+     */
+    @GetMapping("/companyRegion")
+    @ApiOperation(httpMethod = "GET",value = "人才专家行业领域分布")
+    @ApiImplicitParam(name = "type",value = "",dataType = "int")
+    public List companyRegion(String type) {
+        return userService.companyRegion(type);
+    }
+
 
 
 

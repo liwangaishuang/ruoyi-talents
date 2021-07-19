@@ -112,6 +112,11 @@ public interface IUserService
      */
     public List companyType(String type);
 
+    /**
+     人才专家行业领域分布
+     * */
+    public List companyRegion(String type);
+
 
 
 
