@@ -8,6 +8,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.talents.domain.dto.UserDto;
+import com.ruoyi.talents.service.IDeclarationInformationService;
 import com.ruoyi.talents.utils.WordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +48,9 @@ public class UserController extends BaseController
 {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IDeclarationInformationService informationService;
 
     @Autowired
     private TokenService tokenService;
@@ -135,6 +139,16 @@ public class UserController extends BaseController
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(userService.selectUserById(id));
+    }
+
+    /**
+     * 得到用户申报信息
+     */
+    @PreAuthorize("@ss.hasRole('declare')")
+    @GetMapping(value = "/getUserDeclare/{id}")
+    @ApiOperation(httpMethod = "GET",value = "得到用户申报信息")
+    public AjaxResult getUserDeclare(@PathVariable("id") Long id) {
+        return AjaxResult.success(informationService.selectDeclarationInformationById(id));
     }
 
     /**

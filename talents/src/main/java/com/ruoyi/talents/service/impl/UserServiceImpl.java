@@ -4,10 +4,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
-import com.ruoyi.talents.domain.User;
-import com.ruoyi.talents.domain.UserEducationExperience;
-import com.ruoyi.talents.domain.UserOccupational;
-import com.ruoyi.talents.domain.UserWorkExperience;
+import com.ruoyi.talents.domain.*;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
 import com.ruoyi.talents.domain.vo.NewestUserVo;
@@ -15,6 +12,7 @@ import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserMapper;
 import com.ruoyi.talents.mapper.UserOccupationalMapper;
 import com.ruoyi.talents.mapper.UserWorkExperienceMapper;
+import com.ruoyi.talents.service.IDeclarationInformationService;
 import com.ruoyi.talents.service.IUserService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +41,8 @@ public class UserServiceImpl implements IUserService
     private UserOccupationalMapper occupationalMapper;
     @Autowired
     private UserWorkExperienceMapper workExperienceMapper;
-
+    @Autowired
+    private IDeclarationInformationService informationService;
 
     /**
      * 查询用户
@@ -168,7 +167,17 @@ public class UserServiceImpl implements IUserService
             }
         }
         user.setCreateTime(DateUtils.getNowDate());
-        return userMapper.insertUser(user);
+
+        int i = userMapper.insertUser(user);
+        /**新增完插入数据到进度表*/
+        DeclarationInformation information = new DeclarationInformation();
+        information.setUserId(user.getUserId());
+        information.setDeclarationId(user.getId()+"");
+        information.setOperator(user.getUserName());
+        information.setOperationalContext("提交申报");
+        information.setApplicationStatus("0");
+        informationService.insertDeclarationInformation(information);
+        return i;
     }
 
     /**
