@@ -261,4 +261,14 @@ public class UserController extends BaseController
         User user1 = userService.selectUserById(user.getId()+"");
         return WordUtil.exportWord(user1,response);
     }
+
+
+    /**
+     * 获取当前登录用户的申报进度
+     */
+    @GetMapping(value = "/schedule")
+    @ApiOperation(httpMethod = "GET",value = "获取当前登录用户的申报进度")
+    public AjaxResult getScheduleInfo() {
+        return AjaxResult.success(informationService.getScheduleInfo());
+    }
 }

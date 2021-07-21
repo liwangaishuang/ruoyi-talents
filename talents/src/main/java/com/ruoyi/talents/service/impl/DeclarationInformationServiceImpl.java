@@ -1,7 +1,11 @@
 package com.ruoyi.talents.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.framework.web.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.talents.mapper.DeclarationInformationMapper;
@@ -20,6 +24,9 @@ public class DeclarationInformationServiceImpl implements IDeclarationInformatio
     @Autowired
     private DeclarationInformationMapper declarationInformationMapper;
 
+    @Autowired
+    private TokenService tokenService;
+
     /**
      * 查询申报信息
      * 
@@ -30,6 +37,15 @@ public class DeclarationInformationServiceImpl implements IDeclarationInformatio
     public DeclarationInformation selectDeclarationInformationById(Long id)
     {
         return declarationInformationMapper.selectDeclarationInformationById(id);
+    }
+
+    /**
+     * 获取当前登录用户的申报进度
+     */
+    @Override
+    public DeclarationInformation getScheduleInfo() {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        return declarationInformationMapper.getScheduleInfo(loginUser.getUser().getUserId()+"");
     }
 
     /**

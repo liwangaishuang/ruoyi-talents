@@ -20,6 +20,11 @@ public interface DeclarationInformationMapper
     public DeclarationInformation selectDeclarationInformationById(Long id);
 
     /**
+     * 获取当前登录用户的申报进度
+     */
+    public DeclarationInformation getScheduleInfo(String userId);
+
+    /**
      * 根据userId查询申报信息
      * */
     public DeclarationInformation selectDeclarationInformationByUserId(String userId);

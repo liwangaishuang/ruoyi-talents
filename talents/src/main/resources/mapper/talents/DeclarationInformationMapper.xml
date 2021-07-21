@@ -12,11 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="operationalContext"    column="operational_context"    />
         <result property="remark"    column="remark"    />
         <result property="applicationStatus"    column="application_status"    />
+        <result property="isPass"    column="is_pass"    />
         <result property="createTime"    column="create_time"    />
     </resultMap>
 
     <sql id="selectDeclarationInformationVo">
-        select id, user_id, declaration_id, operator, operational_context, remark, application_status, create_time from declaration_information
+        select id, user_id, declaration_id, operator, operational_context, remark, application_status, is_pass, create_time from declaration_information
     </sql>
 
     <select id="selectDeclarationInformationList" parameterType="DeclarationInformation" resultMap="DeclarationInformationResult">
@@ -27,12 +28,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
             <if test="operationalContext != null  and operationalContext != ''"> and operational_context = #{operationalContext}</if>
             <if test="applicationStatus != null  and applicationStatus != ''"> and application_status = #{applicationStatus}</if>
+            <if test="isPass != null  and isPass != ''"> and is_pass = #{isPass}</if>
         </where>
     </select>
     
     <select id="selectDeclarationInformationById" parameterType="Long" resultMap="DeclarationInformationResult">
         <include refid="selectDeclarationInformationVo"/>
         where id = #{id}
+    </select>
+
+    <select id="getScheduleInfo" parameterType="String" resultMap="DeclarationInformationResult">
+        <include refid="selectDeclarationInformationVo"/>
+        where user_id=#{userId}
+        order by create_time desc
+        limit 1;
     </select>
 
     <select id="selectDeclarationInformationByUserId" parameterType="String" resultMap="DeclarationInformationResult">
@@ -51,6 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="operationalContext != null">operational_context,</if>
             <if test="remark != null">remark,</if>
             <if test="applicationStatus != null">application_status,</if>
+            <if test="isPass != null">is_pass,</if>
             <if test="createTime != null">create_time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -60,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="operationalContext != null">#{operationalContext},</if>
             <if test="remark != null">#{remark},</if>
             <if test="applicationStatus != null">#{applicationStatus},</if>
+            <if test="isPass != null">#{isPass},</if>
             <if test="createTime != null">#{createTime},</if>
          </trim>
     </insert>
@@ -73,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="operationalContext != null">operational_context = #{operationalContext},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="applicationStatus != null">application_status = #{applicationStatus},</if>
+            <if test="isPass != null">is_pass = #{isPass},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
         </trim>
         where id = #{id}
