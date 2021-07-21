@@ -20,6 +20,11 @@ public interface IDeclarationInformationService
     public DeclarationInformation selectDeclarationInformationById(Long id);
 
     /**
+     * 根据userId查询申报数据
+     * */
+    public DeclarationInformation selectDeclarationInformationByUserId(String userId);
+
+    /**
      * 查询申报信息列表
      * 
      * @param declarationInformation 申报信息

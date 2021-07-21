@@ -34,6 +34,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDeclarationInformationVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectDeclarationInformationByUserId" parameterType="String" resultMap="DeclarationInformationResult">
+        <include refid="selectDeclarationInformationVo"/>
+        where user_id = #{userId}
+        order by create_time
+        limit 1
+    </select>
         
     <insert id="insertDeclarationInformation" parameterType="DeclarationInformation" useGeneratedKeys="true" keyProperty="id">
         insert into declaration_information

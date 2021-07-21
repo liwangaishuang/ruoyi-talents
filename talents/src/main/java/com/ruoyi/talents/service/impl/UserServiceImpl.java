@@ -4,6 +4,8 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.talents.domain.*;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
@@ -43,6 +45,8 @@ public class UserServiceImpl implements IUserService
     private UserWorkExperienceMapper workExperienceMapper;
     @Autowired
     private IDeclarationInformationService informationService;
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 查询用户
@@ -170,10 +174,11 @@ public class UserServiceImpl implements IUserService
 
         int i = userMapper.insertUser(user);
         /**新增完插入数据到进度表*/
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         DeclarationInformation information = new DeclarationInformation();
         information.setUserId(user.getUserId());
         information.setDeclarationId(user.getId()+"");
-        information.setOperator(user.getUserName());
+        information.setOperator(loginUser.getUser().getUserName());
         information.setOperationalContext("提交申报");
         information.setApplicationStatus("0");
         informationService.insertDeclarationInformation(information);
@@ -242,8 +247,45 @@ public class UserServiceImpl implements IUserService
                 hashMap.put("examineStatus",map.get("examineStatus"));
                 hashMap.put("auditExplain",map.get("auditExplain"));
                 userMapper.examineOneUser(hashMap);
+
+                /**把审核通过的操作存入操作表*/
+                //得到当前用户的用户名
+                LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+                DeclarationInformation information = new DeclarationInformation();
+                information.setUserId(userId);
+                information.setDeclarationId(hashMap.get("id")+"");
+                information.setOperator(loginUser.getUser().getUserName());
+                information.setOperationalContext("审核申报");
+                information.setApplicationStatus("1");
+                informationService.insertDeclarationInformation(information);
+                /**修改最初申报的申报id*/
+                DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
+                information1.setDeclarationId(hashMap.get("id")+"");
+                informationService.updateDeclarationInformation(information1);
             }
             return ids.size();
+        }
+        List<Integer> ids = (List)map.get("id");
+        for (Integer id:ids) {
+            User user = userMapper.selectUserById(id+"");
+            String userId = user.getUserId();
+            /**把审核通过的操作存入操作表*/
+            //得到当前用户的用户名
+            LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+            DeclarationInformation information = new DeclarationInformation();
+            information.setUserId(userId);
+            information.setDeclarationId(user.getId()+"");
+            information.setOperator(loginUser.getUser().getUserName());
+            information.setOperationalContext("审核申报");
+            information.setApplicationStatus("1");
+            informationService.insertDeclarationInformation(information);
+            System.out.println("========================================");
+            System.out.println(information);
+            System.out.println("========================================");
+            /**修改最初申报的申报id*/
+            DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
+            information1.setDeclarationId(user.getId()+"");
+            informationService.updateDeclarationInformation(information1);
         }
 
         return userMapper.examineUser(map);

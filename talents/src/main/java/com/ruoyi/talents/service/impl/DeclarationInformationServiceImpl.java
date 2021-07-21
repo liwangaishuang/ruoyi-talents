@@ -33,6 +33,14 @@ public class DeclarationInformationServiceImpl implements IDeclarationInformatio
     }
 
     /**
+     * 根据userId查询申报信息
+     * */
+    @Override
+    public DeclarationInformation selectDeclarationInformationByUserId(String userId) {
+        return declarationInformationMapper.selectDeclarationInformationByUserId(userId);
+    }
+
+    /**
      * 查询申报信息列表
      * 
      * @param declarationInformation 申报信息
