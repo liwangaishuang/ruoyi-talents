@@ -142,16 +142,6 @@ public class UserController extends BaseController
     }
 
     /**
-     * 得到用户申报信息
-     */
-    @PreAuthorize("@ss.hasRole('declare')")
-    @GetMapping(value = "/getUserDeclare/{id}")
-    @ApiOperation(httpMethod = "GET",value = "得到用户申报信息")
-    public AjaxResult getUserDeclare(@PathVariable("id") Long id) {
-        return AjaxResult.success(informationService.selectDeclarationInformationById(id));
-    }
-
-    /**
      * 获取用户最近的详细信息
      */
     @GetMapping(value = "/newest")

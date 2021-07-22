@@ -42,6 +42,10 @@ public class DeclarationInformation {
     @Excel(name = "申报状态")
     private String applicationStatus;
 
+    /** 备注 */
+    @Excel(name = "备注")
+    private String remark;
+
     /** 是否审核通过(0:通过 1:不通过) */
     @Excel(name = "是否审核通过(0:通过 1:不通过)")
     private String isPass;
