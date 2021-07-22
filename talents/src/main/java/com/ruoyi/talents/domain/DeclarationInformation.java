@@ -15,6 +15,8 @@ import java.util.Date;
  * @date 2021-07-19
  */
 
+
+
 @Data
 public class DeclarationInformation {
     private static final long serialVersionUID = 1L;
