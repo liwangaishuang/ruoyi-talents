@@ -2,6 +2,9 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 import java.util.Set;
+
+import com.ruoyi.talents.service.ISysUserService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +42,9 @@ public class SysLoginController
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private ISysUserService sysUserService;
+
     /**
      * 登录方法
      * 
@@ -53,6 +59,19 @@ public class SysLoginController
         String token = loginService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.getCode(),
                 loginBody.getUuid());
         ajax.put(Constants.TOKEN, token);
+        return ajax;
+    }
+
+    /**判断登录的该用户是不是管理端角色*/
+    @GetMapping("/judgeRole")
+    public AjaxResult judgeRole(String username) {
+        AjaxResult ajax = AjaxResult.success();
+        SysUser sysUser = sysUserService.selectUserByUserName(username);
+        if (ObjectUtils.isNotEmpty(sysUser.getDeptId())){
+            ajax.put("deptId", sysUser.getDeptId());
+        }else {
+            ajax.put("deptId", null);
+        }
         return ajax;
     }
 
