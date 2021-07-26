@@ -49,6 +49,15 @@ public class DeclarationInformationServiceImpl implements IDeclarationInformatio
     }
 
     /**
+     * 申报进度过程
+     */
+    @Override
+    public List<DeclarationInformation> declareProcess() {
+        LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+        return declarationInformationMapper.declareProcess(loginUser.getUser().getUserId()+"");
+    }
+
+    /**
      * 根据userId查询申报信息
      * */
     @Override

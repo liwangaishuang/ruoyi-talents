@@ -25,6 +25,11 @@ public interface DeclarationInformationMapper
     public DeclarationInformation getScheduleInfo(String userId);
 
     /**
+     * 申报进度过程
+     * */
+    public List<DeclarationInformation> declareProcess(String userId);
+
+    /**
      * 根据userId查询申报信息
      * */
     public DeclarationInformation selectDeclarationInformationByUserId(String userId);

@@ -258,6 +258,7 @@ public class UserServiceImpl implements IUserService
                 information.setOperationalContext("审核申报");
                 information.setApplicationStatus("1");
                 information.setIsPass("0");
+                information.setRemark(map.get("auditExplain")+"");
                 informationService.insertDeclarationInformation(information);
                 /**修改最初申报的申报id*/
                 DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
@@ -280,6 +281,7 @@ public class UserServiceImpl implements IUserService
             information.setOperationalContext("审核申报");
             information.setApplicationStatus("1");
             information.setIsPass("1");
+            information.setRemark(map.get("auditExplain")+"");
             informationService.insertDeclarationInformation(information);
             /**修改最初申报的申报id*/
             DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);

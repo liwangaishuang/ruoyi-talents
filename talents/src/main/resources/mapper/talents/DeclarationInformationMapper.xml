@@ -45,6 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         limit 1;
     </select>
 
+    <select id="declareProcess" parameterType="String" resultMap="DeclarationInformationResult">
+        <include refid="selectDeclarationInformationVo"/>
+        where declaration_id=(select id from user where user_id=#{userId} order by create_time desc limit 1)
+    </select>
+
     <select id="selectDeclarationInformationByUserId" parameterType="String" resultMap="DeclarationInformationResult">
         <include refid="selectDeclarationInformationVo"/>
         where user_id = #{userId}

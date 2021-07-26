@@ -261,4 +261,13 @@ public class UserController extends BaseController
     public AjaxResult getScheduleInfo() {
         return AjaxResult.success(informationService.getScheduleInfo());
     }
+
+    /**
+     * 申报进度过程
+     */
+    @GetMapping(value = "/declareProcess")
+    @ApiOperation(httpMethod = "GET",value = "申报进度过程")
+    public AjaxResult declareProcess() {
+        return AjaxResult.success(informationService.declareProcess());
+    }
 }

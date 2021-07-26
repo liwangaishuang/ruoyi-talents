@@ -1,5 +1,6 @@
 package com.ruoyi.talents.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -54,5 +55,6 @@ public class DeclarationInformation {
 
     /** 创建时间 */
     @Excel(name = "创建时间")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }
