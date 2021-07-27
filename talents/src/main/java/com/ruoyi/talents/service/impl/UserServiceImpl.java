@@ -9,6 +9,7 @@ import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.talents.domain.*;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.ExportUserVo;
 import com.ruoyi.talents.domain.vo.NewestUserVo;
 import com.ruoyi.talents.mapper.UserEducationExperienceMapper;
 import com.ruoyi.talents.mapper.UserMapper;
@@ -88,6 +89,20 @@ public class UserServiceImpl implements IUserService
         }
         for (User user2:users) {
             setUser(user2);
+        }
+        return users;
+    }
+
+    @Override
+    @Transactional
+    public List<ExportUserVo> selectUserList2(User user)
+    {
+        List<ExportUserVo> users = userMapper.selectSpecialistList2(user);
+        if (ObjectUtils.isEmpty(users)){
+            return null;
+        }
+        for (ExportUserVo user2:users) {
+            setUser2(user2);
         }
         return users;
     }
@@ -421,6 +436,16 @@ public class UserServiceImpl implements IUserService
     }
 
     public User setUser(User user){
+        /**先查询user相关表*/
+        if (ObjectUtils.isNotEmpty(user)){
+            user.setExperience(educationExperienceMapper.selectUserEducationExperienceById(user.getId()));
+            user.setWorkExperience(workExperienceMapper.selectUserWorkExperienceById(user.getId()));
+            user.setOccupational(occupationalMapper.selectUserOccupationalById(user.getId()));
+        }
+        return user;
+    }
+
+    public ExportUserVo setUser2(ExportUserVo user){
         /**先查询user相关表*/
         if (ObjectUtils.isNotEmpty(user)){
             user.setExperience(educationExperienceMapper.selectUserEducationExperienceById(user.getId()));

@@ -8,6 +8,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.talents.domain.dto.UserDto;
+import com.ruoyi.talents.domain.vo.ExportUserVo;
 import com.ruoyi.talents.service.IDeclarationInformationService;
 import com.ruoyi.talents.utils.WordUtil;
 import io.swagger.annotations.Api;
@@ -125,8 +126,8 @@ public class UserController extends BaseController
     @ApiOperation(httpMethod = "GET",value = "导出用户列表")
     public AjaxResult export(User user)
     {
-        List<User> list = userService.selectUserList(user);
-        ExcelUtil<User> util = new ExcelUtil<User>(User.class);
+        List<ExportUserVo> list = userService.selectUserList2(user);
+        ExcelUtil<ExportUserVo> util = new ExcelUtil<ExportUserVo>(ExportUserVo.class);
         return util.exportExcel(list, "用户数据");
     }
 

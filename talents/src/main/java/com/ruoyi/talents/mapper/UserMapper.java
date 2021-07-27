@@ -7,6 +7,7 @@ import java.util.Map;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.ExportUserVo;
 import com.ruoyi.talents.domain.vo.NewestUserVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,6 +45,9 @@ public interface UserMapper
 
     /**查询人才专家库列表*/
     public List<User> selectSpecialistList(User user);
+
+    /**导出人才专家库*/
+    public List<ExportUserVo> selectSpecialistList2(User user);
 
     /**查询人才移除管理列表*/
     public List<User> selectRemoveList(User user);

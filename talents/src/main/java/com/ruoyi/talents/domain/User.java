@@ -42,8 +42,8 @@ public class User
     @Excel(name = "证件类型")
     private String idNumberType;
 
-    /** 身份证号 */
-    @Excel(name = "身份证号")
+    /** 证件号码 */
+    @Excel(name = "证件号码")
     private String userIdNumber;
 
     /** 出生日期 */

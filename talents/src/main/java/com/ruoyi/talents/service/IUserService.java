@@ -8,6 +8,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.talents.domain.User;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.DistributionVo;
+import com.ruoyi.talents.domain.vo.ExportUserVo;
 import com.ruoyi.talents.domain.vo.NewestUserVo;
 
 /**
@@ -35,6 +36,8 @@ public interface IUserService
      * @return 用户集合
      */
     public List<User> selectUserList(User user);
+
+    public List<ExportUserVo> selectUserList2(User user);
 
     /**查询人才专家库列表*/
     public List<User> selectSpecialistList(User user);

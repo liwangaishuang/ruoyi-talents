@@ -87,6 +87,61 @@
         <result property="companySite"    column="company_site"    />
     </resultMap>
 
+    <resultMap type="ExportUserVo" id="ExportResult">
+        <result property="id"    column="id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="idNumberType"    column="id_number_type"    />
+        <result property="userIdNumber"    column="user_id_number"    />
+        <result property="birthDate"    column="birth_date"    />
+        <result property="age"    column="age"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="email"    column="email"    />
+        <result property="officePhone"    column="office_phone"    />
+        <result property="homeTelephone"    column="home_telephone"    />
+        <result property="userSex"    column="user_sex"    />
+        <result property="nationality"    column="nationality"    />
+        <result property="nation"    column="nation"    />
+        <result property="postalCode"    column="postal_code"    />
+        <result property="politicsStatus"    column="politics_status"    />
+        <result property="professional"    column="professional"    />
+        <result property="dwellRegion"    column="dwell_region"    />
+        <result property="dwellSite"    column="dwell_site"    />
+        <result property="specialtyType"    column="specialty_type"    />
+        <result property="jobNature"    column="job_nature"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyType"    column="company_type"    />
+        <result property="companyRegion"    column="company_region"    />
+        <result property="creditCode"    column="credit_code"    />
+        <result property="secondLevelDepartment"    column="second_level_department"    />
+        <result property="position"    column="position"    />
+        <result property="companySite"    column="company_site"    />
+        <result property="highestEducation"    column="highest_education"    />
+        <result property="graduateAcademy"    column="graduate_academy"    />
+        <result property="major"    column="major"    />
+        <result property="highestDegree"    column="highest_degree"    />
+        <result property="awardAcademy"    column="award_academy"    />
+        <result property="majorAcademy"    column="major_academy"    />
+        <result property="isAcademician"    column="is_academician"    />
+        <result property="isDoctoralSupervisor"    column="is_doctoral_supervisor"    />
+        <result property="language"    column="language"    />
+        <result property="degree"    column="degree"    />
+        <result property="standard"    column="standard"    />
+        <result property="reviewExperience"    column="review_experience"    />
+        <result property="mainIndustry"    column="main_industry"    />
+        <result property="elseIndustry"    column="else_industry"    />
+        <result property="fundSubject"    column="fund_subject"    />
+        <result property="internationalDiscipline"    column="international_discipline"    />
+        <result property="educationSubject"    column="education_subject"    />
+        <result property="industries"    column="industries"    />
+        <result property="researchDirection"    column="research_direction"    />
+        <result property="workContent"    column="work_content"    />
+        <result property="mainContribution"    column="main_contribution"    />
+        <result property="rewardsPunishment"    column="rewards_punishment"    />
+        <result property="avoidCompany"    column="avoid_company"    />
+        <result property="resultsOrPatents"    column="results_or_patents"    />
+        <result property="honorsOrTitles"    column="honors_or_titles"    />
+    </resultMap>
+
     <sql id="selectUserVo">
         select id, user_id, user_name, portrait, password, id_number_type, user_id_number, birth_date, age, phone_number, email,
         office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region,
@@ -170,6 +225,78 @@
     </select>
 
     <select id="selectSpecialistList" parameterType="User" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        <where>
+            1=1 and status in (2) and examine_status=0 and is_remove=0
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="portrait != null  and portrait != ''"> and portrait = #{portrait}</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="idNumberType != null  and idNumberType != ''"> and id_number_type = #{idNumberType}</if>
+            <if test="userIdNumber != null  and userIdNumber != ''"> and user_id_number = #{userIdNumber}</if>
+            <if test="birthDate != null "> and birth_date = #{birthDate}</if>
+            <if test="minAge != null  and minAge != ''"> and age &gt;= #{minAge}+0</if>
+            <if test="maxAge != null  and maxAge != ''"> and age &lt; #{maxAge}+0</if>
+            <if test="phoneNumber != null  and phoneNumber != ''"> and phone_number = #{phoneNumber}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="officePhone != null  and officePhone != ''"> and office_phone = #{officePhone}</if>
+            <if test="homeTelephone != null  and homeTelephone != ''"> and home_telephone = #{homeTelephone}</if>
+            <if test="userSex != null  and userSex != ''"> and user_sex = #{userSex}</if>
+            <if test="nationality != null  and nationality != ''"> and nationality = #{nationality}</if>
+            <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
+            <if test="postalCode != null  and postalCode != ''"> and postal_code = #{postalCode}</if>
+            <if test="politicsStatus != null  and politicsStatus != ''"> and politics_status = #{politicsStatus}</if>
+            <if test="professional != null  and professional != ''"> and professional = #{professional}</if>
+            <if test="dwellRegion != null  and dwellRegion != ''"> and dwell_region = #{dwellRegion}</if>
+            <if test="dwellSite != null  and dwellSite != ''"> and dwell_site = #{dwellSite}</if>
+            <if test="specialtyType != null  and specialtyType != ''"> and specialty_type = #{specialtyType}</if>
+            <if test="jobNature != null  and jobNature != ''"> and job_nature = #{jobNature}</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyType != null  and companyType != ''"> and company_type = #{companyType}</if>
+            <if test="companyRegion != null  and companyRegion != ''"> and company_region = #{companyRegion}</if>
+            <if test="creditCode != null  and creditCode != ''"> and credit_code = #{creditCode}</if>
+            <if test="secondLevelDepartment != null  and secondLevelDepartment != ''"> and second_level_department = #{secondLevelDepartment}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="companySite != null  and companySite != ''"> and company_site = #{companySite}</if>
+            <if test="highestEducation != null  and highestEducation != ''"> and highest_education = #{highestEducation}</if>
+            <if test="graduateAcademy != null  and graduateAcademy != ''"> and graduate_academy = #{graduateAcademy}</if>
+            <if test="major != null  and major != ''"> and major = #{major}</if>
+            <if test="highestDegree != null  and highestDegree != ''"> and highest_degree = #{highestDegree}</if>
+            <if test="awardAcademy != null  and awardAcademy != ''"> and award_academy = #{awardAcademy}</if>
+            <if test="majorAcademy != null  and majorAcademy != ''"> and major_academy = #{majorAcademy}</if>
+            <if test="isAcademician != null  and isAcademician != ''"> and is_academician = #{isAcademician}</if>
+            <if test="isDoctoralSupervisor != null  and isDoctoralSupervisor != ''"> and is_doctoral_supervisor = #{isDoctoralSupervisor}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="degree != null  and degree != ''"> and degree = #{degree}</if>
+            <if test="standard != null  and standard != ''"> and standard = #{standard}</if>
+            <if test="reviewExperience != null  and reviewExperience != ''"> and review_experience = #{reviewExperience}</if>
+            <if test="mainIndustry != null  and mainIndustry != ''"> and main_industry = #{mainIndustry}</if>
+            <if test="elseIndustry != null  and elseIndustry != ''"> and else_industry = #{elseIndustry}</if>
+            <if test="fundSubject != null  and fundSubject != ''"> and fund_subject = #{fundSubject}</if>
+            <if test="internationalDiscipline != null  and internationalDiscipline != ''"> and international_discipline = #{internationalDiscipline}</if>
+            <if test="educationSubject != null  and educationSubject != ''"> and education_subject = #{educationSubject}</if>
+            <if test="industries != null  and industries != ''"> and industries = #{industries}</if>
+            <if test="researchDirection != null  and researchDirection != ''"> and research_direction = #{researchDirection}</if>
+            <if test="workContent != null  and workContent != ''"> and work_content = #{workContent}</if>
+            <if test="mainContribution != null  and mainContribution != ''"> and main_contribution = #{mainContribution}</if>
+            <if test="rewardsPunishment != null  and rewardsPunishment != ''"> and rewards_punishment = #{rewardsPunishment}</if>
+            <if test="avoidCompany != null  and avoidCompany != ''"> and avoid_company = #{avoidCompany}</if>
+            <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
+            <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
+            <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="auditTime != null"> and audit_time = #{auditTime}</if>
+            <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
+            <if test="minActYear != null  and minActYear != ''"> and act_year &gt;= #{minActYear}+0</if>
+            <if test="maxActYear != null  and maxActYear != ''"> and act_year &lt; #{maxActYear}+0</if>
+            <if test="isRemove != null  and isRemove != ''"> and is_remove = #{isRemove}</if>
+            <if test="removeTime != null"> and remove_time = #{removeTime}</if>
+            <if test="removeOverTime != null  and removeOverTime != ''"> and remove_over_time = #{removeOverTime}</if>
+            <if test="removeCause != null  and removeCause != ''"> and remove_cause = #{removeCause}</if>
+            <if test="minUpdateTime != null and maxUpdateTime != null"> and updateTime betton #{minUpdateTime} and #{maxUpdateTime}</if>
+        </where>
+    </select>
+
+    <select id="selectSpecialistList2" parameterType="User" resultMap="ExportResult">
         <include refid="selectUserVo"/>
         <where>
             1=1 and status in (2) and examine_status=0 and is_remove=0
