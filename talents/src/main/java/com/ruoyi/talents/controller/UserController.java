@@ -13,6 +13,7 @@ import com.ruoyi.talents.service.IDeclarationInformationService;
 import com.ruoyi.talents.utils.WordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,15 +119,26 @@ public class UserController extends BaseController
     }
 
     /**
-     * 导出用户列表
+     * 导出人才管理用户
      */
     @PreAuthorize("@ss.hasPermi('declare:self:export')")
     @Log(title = "用户", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    @ApiOperation(httpMethod = "GET",value = "导出用户列表")
-    public AjaxResult export(User user)
-    {
+    @ApiOperation(httpMethod = "GET",value = "导出人才管理用户")
+    public AjaxResult export(User user) {
         List<ExportUserVo> list = userService.selectUserList2(user);
+        ExcelUtil<ExportUserVo> util = new ExcelUtil<ExportUserVo>(ExportUserVo.class);
+        return util.exportExcel(list, "用户数据");
+    }
+
+    /**
+     * 导出人才移除用户
+     */
+    @Log(title = "用户", businessType = BusinessType.EXPORT)
+    @GetMapping("/exportRemove")
+    @ApiOperation(httpMethod = "GET",value = "导出人才移除用户")
+    public AjaxResult exportRemove(User user) {
+        List<ExportUserVo> list = userService.selectUserList3(user);
         ExcelUtil<ExportUserVo> util = new ExcelUtil<ExportUserVo>(ExportUserVo.class);
         return util.exportExcel(list, "用户数据");
     }

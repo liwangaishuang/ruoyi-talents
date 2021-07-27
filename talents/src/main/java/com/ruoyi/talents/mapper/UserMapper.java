@@ -49,6 +49,11 @@ public interface UserMapper
     /**导出人才专家库*/
     public List<ExportUserVo> selectSpecialistList2(User user);
 
+    /**导出人才移除库*/
+    public List<ExportUserVo> selectSpecialistList3(User user);
+
+    public List<ExportUserVo> selectListByIds(String[] ids);
+
     /**查询人才移除管理列表*/
     public List<User> selectRemoveList(User user);
 

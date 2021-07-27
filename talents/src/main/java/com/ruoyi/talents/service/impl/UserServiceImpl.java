@@ -95,9 +95,31 @@ public class UserServiceImpl implements IUserService
 
     @Override
     @Transactional
-    public List<ExportUserVo> selectUserList2(User user)
-    {
-        List<ExportUserVo> users = userMapper.selectSpecialistList2(user);
+    public List<ExportUserVo> selectUserList2(User user) {
+        List<ExportUserVo> users=null;
+        if (ObjectUtils.isNotEmpty(user.getIds())){
+            users= userMapper.selectListByIds(user.getIds());
+        }else {
+            users= userMapper.selectSpecialistList2(user);
+        }
+        if (ObjectUtils.isEmpty(users)){
+            return null;
+        }
+        for (ExportUserVo user2:users) {
+            setUser2(user2);
+        }
+        return users;
+    }
+
+    @Override
+    @Transactional
+    public List<ExportUserVo> selectUserList3(User user) {
+        List<ExportUserVo> users=null;
+        if (ObjectUtils.isNotEmpty(user.getIds())){
+            users= userMapper.selectListByIds(user.getIds());
+        }else {
+            users= userMapper.selectSpecialistList3(user);
+        }
         if (ObjectUtils.isEmpty(users)){
             return null;
         }

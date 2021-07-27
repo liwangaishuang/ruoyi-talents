@@ -15,7 +15,6 @@ public class ExportUserVo {
     private static final long serialVersionUID = 1L;
 
     /** id*/
-    @Excel(name = "id")
     private Long id;
 
     /** 用户姓名 */

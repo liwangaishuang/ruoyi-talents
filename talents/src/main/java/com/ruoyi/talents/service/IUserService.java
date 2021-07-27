@@ -37,7 +37,11 @@ public interface IUserService
      */
     public List<User> selectUserList(User user);
 
+    /**导出人才管理用户*/
     public List<ExportUserVo> selectUserList2(User user);
+
+    /**导出人才移除用户*/
+    public List<ExportUserVo> selectUserList3(User user);
 
     /**查询人才专家库列表*/
     public List<User> selectSpecialistList(User user);

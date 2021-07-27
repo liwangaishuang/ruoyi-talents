@@ -328,4 +328,7 @@ public class User
     /** 备注 */
     private String remark;
 
+    /**选中的id*/
+    private String[] ids;
+
 }
