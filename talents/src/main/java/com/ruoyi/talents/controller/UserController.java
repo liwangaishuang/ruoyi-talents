@@ -152,6 +152,15 @@ public class UserController extends BaseController
     }
 
     /**
+     * 获取当前用户详细信息(跳转查看专家申报信息)
+     */
+    @GetMapping(value = "/getUserNowInfo")
+    @ApiOperation(httpMethod = "GET",value = "获取当前用户详细信息(跳转查看专家申报信息)")
+    public AjaxResult getUserNowInfo() {
+        return AjaxResult.success(userService.getUserNowInfo());
+    }
+
+    /**
      * 获取用户最近的详细信息
      */
     @GetMapping(value = "/newest")

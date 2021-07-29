@@ -614,6 +614,13 @@
         where id = #{id}
     </select>
 
+    <select id="getUserNowInfo" parameterType="String" resultMap="UserResult">
+        <include refid="selectUserVo"/>
+        where user_id=108
+        order by create_time desc
+        limit 1
+    </select>
+
     <select id="getNewestInfo" parameterType="String" resultType="NewestUserVo">
         select status,examine_status,is_remove
         from user

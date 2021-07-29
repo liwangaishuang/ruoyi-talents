@@ -62,6 +62,16 @@ public class UserServiceImpl implements IUserService
         return user;
     }
 
+    /**
+     * 获取当前用户详细信息(跳转查看专家申报信息)
+     * */
+    @Override
+    public User getUserNowInfo() {
+        String id = SecurityUtils.getLoginUser().getUser().getUserId()+"";
+        User user = setUser(userMapper.getUserNowInfo(id));
+        return user;
+    }
+
     @Override
     public NewestUserVo getNewestInfo() {
         String id = SecurityUtils.getLoginUser().getUser().getUserId()+"";

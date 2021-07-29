@@ -27,6 +27,11 @@ public interface IUserService
      */
     public User selectUserById(String id);
 
+    /**
+     * 获取当前用户详细信息(跳转查看专家申报信息)
+     * */
+    public User getUserNowInfo();
+
     public NewestUserVo getNewestInfo();
 
     /**
