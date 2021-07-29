@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="applicationStatus"    column="application_status"    />
         <result property="isPass"    column="is_pass"    />
         <result property="createTime"    column="create_time"    />
+        <result property="isRemove"    column="is_remove"    />
     </resultMap>
 
     <sql id="selectDeclarationInformationVo">
@@ -32,16 +33,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isPass != null  and isPass != ''"> and is_pass = #{isPass}</if>
         </where>
     </select>
-    
+
     <select id="selectDeclarationInformationById" parameterType="Long" resultMap="DeclarationInformationResult">
         <include refid="selectDeclarationInformationVo"/>
         where id = #{id}
     </select>
 
     <select id="getScheduleInfo" parameterType="String" resultMap="DeclarationInformationResult">
-        <include refid="selectDeclarationInformationVo"/>
-        where user_id=#{userId}
-        order by create_time desc
+        select di.id, di.user_id, declaration_id, operator, operational_context, remark, application_status, is_pass, di.create_time,u.is_remove
+        from declaration_information di,user u
+        where di.declaration_id=u.id
+        <if test="userId!=null and userId!=''">
+            and di.user_id=#{userId}
+        </if>
+        order by di.create_time desc
         limit 1;
     </select>
 

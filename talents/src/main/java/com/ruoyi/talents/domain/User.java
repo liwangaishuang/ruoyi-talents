@@ -247,6 +247,10 @@ public class User
     @Excel(name = "简历地址")
     private String resumeSite;
 
+    /** 专家登记表地址 */
+    @Excel(name = "专家登记表地址")
+    private String expertRegister;
+
     /** 申报状态(0:暂存 1:未审核 2:已审核 3:已删除) */
     @Excel(name = "申报状态(0:暂存 1:未审核 2:已审核)")
     private String status;

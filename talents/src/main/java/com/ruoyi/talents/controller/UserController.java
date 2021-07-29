@@ -1,5 +1,6 @@
 package com.ruoyi.talents.controller;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,25 +8,21 @@ import java.util.Map;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.utils.file.FileUtils;
 import com.ruoyi.talents.domain.dto.UserDto;
 import com.ruoyi.talents.domain.vo.ExportUserVo;
 import com.ruoyi.talents.service.IDeclarationInformationService;
 import com.ruoyi.talents.utils.WordUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.framework.web.service.TokenService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -282,5 +279,38 @@ public class UserController extends BaseController
     @ApiOperation(httpMethod = "GET",value = "申报进度过程")
     public AjaxResult declareProcess() {
         return AjaxResult.success(informationService.declareProcess());
+    }
+
+    /**
+     * 导出模板文件
+     */
+    @GetMapping(value = "/importTemplate")
+    @ResponseBody
+    @ApiOperation(httpMethod = "GET",value = "导出模板文件")
+    public void importTemplate(HttpServletResponse response) throws IOException {
+        String path="C:\\Users\\LiWang\\Desktop\\人才开发\\人才专家库系统\\附件模版\\专家登记表.doc";
+        File file = new File(path);
+        String filename = file.getName();
+
+        /*response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        FileUtils.setAttachmentResponseHeader(response, filename);
+        FileUtils.writeBytes(path, response.getOutputStream());*/
+
+        InputStream fis = new BufferedInputStream(new FileInputStream(path));
+        //  用available（）方法来获取文件大小，进而用来定义缓冲数组的长度
+        byte[] buffer = new byte[fis.available()];
+        fis.read(buffer);
+        fis.close();
+        // 清空response
+        response.reset();
+        response.setCharacterEncoding(CharEncoding.UTF_8);
+        // 设置response的Header
+        response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes()));
+        response.addHeader("Content-Length", "" + file.length());
+        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+        response.setContentType("application/octet-stream");
+        toClient.write(buffer);
+        toClient.flush();
+        toClient.close();
     }
 }

@@ -53,6 +53,10 @@ public class DeclarationInformation {
     @Excel(name = "是否审核通过(0:通过 1:不通过)")
     private String isPass;
 
+    /** 是否移除*/
+    @Excel(name = "是否移除(0:未移除1:已移除)")
+    private String isRemove;
+
     /** 创建时间 */
     @Excel(name = "创建时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
