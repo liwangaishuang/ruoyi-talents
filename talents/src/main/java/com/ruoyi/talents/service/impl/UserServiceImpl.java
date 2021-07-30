@@ -268,11 +268,11 @@ public class UserServiceImpl implements IUserService
         if (ObjectUtils.isEmpty(map.get("id"))){
             return 0;
         }
+        List<Integer> ids = (List)map.get("id");
         /**当该用户审批通过时，则判断该用户是否已在人才专家库，如果在则更新该用户的数据*/
         /**如果审批通过*/
         if ("0".equals(map.get("examineStatus"))){
             /**因可能有多个用户同时通过，所以需要循环*/
-            List<Integer> ids = (List)map.get("id");
             for (Integer id: ids) {
                 User user = userMapper.selectUserById(id+"");
                 String userId = user.getUserId();
@@ -281,11 +281,8 @@ public class UserServiceImpl implements IUserService
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("id",id);
                 if (number>1){
-                    Long earlierId = userMapper.getEarlierUser(userId);
-                    /**删除旧数据，把旧id给新数据,id给完把审核结果放入数据中*/
-                    userMapper.deleteUserById(earlierId);
-                    userMapper.updateUserById(earlierId,id.longValue());
-                    hashMap.put("id",earlierId);
+                    /**删除旧数据*/
+                    //userMapper.deleteEarlierUser(userId);
                 }
                 hashMap.put("updateTime",DateUtils.getNowDate());
                 hashMap.put("auditTime",DateUtils.getNowDate());
@@ -308,17 +305,15 @@ public class UserServiceImpl implements IUserService
                 information.setRemark(map.get("auditExplain")+"");
                 informationService.insertDeclarationInformation(information);
                 /**修改最初申报的申报id*/
-                DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
+                /*DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
                 information1.setDeclarationId(hashMap.get("id")+"");
-                informationService.updateDeclarationInformation(information1);
+                informationService.updateDeclarationInformation(information1);*/
             }
             return ids.size();
         }
-        List<Integer> ids = (List)map.get("id");
         for (Integer id:ids) {
             User user = userMapper.selectUserById(id+"");
             String userId = user.getUserId();
-            /**把审核通过的操作存入操作表*/
             //得到当前用户的用户名
             LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
             DeclarationInformation information = new DeclarationInformation();
@@ -330,10 +325,6 @@ public class UserServiceImpl implements IUserService
             information.setIsPass("1");
             information.setRemark(map.get("auditExplain")+"");
             informationService.insertDeclarationInformation(information);
-            /**修改最初申报的申报id*/
-            DeclarationInformation information1 = informationService.selectDeclarationInformationByUserId(userId);
-            information1.setDeclarationId(user.getId()+"");
-            informationService.updateDeclarationInformation(information1);
         }
 
         return userMapper.examineUser(map);

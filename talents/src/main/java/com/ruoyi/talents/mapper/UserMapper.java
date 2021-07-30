@@ -34,8 +34,8 @@ public interface UserMapper
 
     public NewestUserVo getNewestInfo(String id);
 
-    /**该用户更早的填报数据*/
-    public Long getEarlierUser(String id);
+    /**删除该用户更早的填报数据*/
+    public int deleteEarlierUser(String id);
 
     /**查询有几条相同userId的数据*/
     public Long getUserNumber(String id);
