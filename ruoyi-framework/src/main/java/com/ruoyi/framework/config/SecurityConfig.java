@@ -117,7 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/system/user/resetPwd2","/system/user/add2").anonymous()
                 .antMatchers("/judgeRole").anonymous()
                 .antMatchers("/declare/specialist/importTemplate").anonymous()
-                .antMatchers("/common/upload").anonymous()
+                .antMatchers("/common/upload2").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()
