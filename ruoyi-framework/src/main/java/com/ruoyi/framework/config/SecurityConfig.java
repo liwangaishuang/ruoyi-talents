@@ -88,6 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity httpSecurity) throws Exception
     {
         httpSecurity
+                /**白名单*/
                 // CSRF禁用，因为不使用session
                 .csrf().disable()
                 // 认证失败处理类
@@ -115,6 +116,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/druid/**").anonymous()
                 .antMatchers("/system/user/resetPwd2","/system/user/add2").anonymous()
                 .antMatchers("/judgeRole").anonymous()
+                .antMatchers("/declare/specialist/importTemplate").anonymous()
+                .antMatchers("/common/upload").anonymous()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated()
                 .and()

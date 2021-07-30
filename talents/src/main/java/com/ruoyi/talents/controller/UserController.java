@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.codec.CharEncoding;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,10 @@ public class UserController extends BaseController
 
     @Autowired
     private TokenService tokenService;
+
+    @Value("${ruoyi.profile}")
+    private String uploadPath;
+
     /**
      * 查询列表
      */
@@ -297,7 +302,7 @@ public class UserController extends BaseController
     @ResponseBody
     @ApiOperation(httpMethod = "GET",value = "导出模板文件")
     public void importTemplate(HttpServletResponse response) throws IOException {
-        String path="C:\\Users\\LiWang\\Desktop\\人才开发\\人才专家库系统\\附件模版\\专家登记表.doc";
+        String path=uploadPath+"/专家登记表.doc";
         File file = new File(path);
         String filename = file.getName();
 
