@@ -61,6 +61,7 @@
         <result property="resultsOrPatents"    column="results_or_patents"    />
         <result property="honorsOrTitles"    column="honors_or_titles"    />
         <result property="resumeSite"    column="resume_site"    />
+        <result property="expertRegister"    column="expert_register"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="status"    column="status"    />
@@ -144,13 +145,13 @@
 
     <sql id="selectUserVo">
         select id, user_id, user_name, portrait, password, id_number_type, user_id_number, birth_date, age, phone_number, email,
-        office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region,
-        dwell_site, specialty_type, job_nature, company_name, company_type, company_region, credit_code, second_level_department,
-        position, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, major_academy,
-        is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry,
-        fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution,
-        rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, create_time, update_time, status,
-        examine_status,audit_time,audit_explain,act_year,is_remove,remove_time,remove_over_time,remove_cause
+               office_phone, home_telephone, user_sex, nationality, nation, postal_code, politics_status, professional, dwell_region,
+               dwell_site, specialty_type, job_nature, company_name, company_type, company_region, credit_code, second_level_department,
+               position, company_site, highest_education, graduate_academy, major, highest_degree, award_academy, major_academy,
+               is_academician, is_doctoral_supervisor, language, degree, standard, review_experience, main_industry, else_industry,
+            fund_subject, international_discipline, education_subject, industries, research_direction, work_content, main_contribution,
+            rewards_punishment, avoid_company, results_or_patents, honors_or_titles, resume_site, expert_register, create_time, update_time, status,
+            examine_status,audit_time,audit_explain,act_year,is_remove,remove_time,remove_over_time,remove_cause
         from user
     </sql>
 
@@ -212,6 +213,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
@@ -284,6 +286,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="minActYear != null  and minActYear != ''"> and act_year &gt;= #{minActYear}+0</if>
@@ -356,6 +359,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="minActYear != null  and minActYear != ''"> and act_year &gt;= #{minActYear}+0</if>
@@ -428,6 +432,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="minActYear != null  and minActYear != ''"> and act_year &gt;= #{minActYear}+0</if>
@@ -509,6 +514,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
             <if test="auditExplain != null  and auditExplain != ''"> and audit_explain = #{auditExplain}</if>
             <if test="minActYear != null  and minActYear != ''"> and act_year &gt;= #{minActYear}+0</if>
@@ -580,6 +586,7 @@
             <if test="resultsOrPatents != null  and resultsOrPatents != ''"> and results_or_patents = #{resultsOrPatents}</if>
             <if test="honorsOrTitles != null  and honorsOrTitles != ''"> and honors_or_titles = #{honorsOrTitles}</if>
             <if test="resumeSite != null  and resumeSite != ''"> and resume_site = #{resumeSite}</if>
+            <if test="expertRegister != null  and expertRegister != ''"> and expert_register = #{expertRegister}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="examineStatus != null  and examineStatus != ''"> and examine_status = #{examineStatus}</if>
             <if test="auditTime != null"> and audit_time = #{auditTime}</if>
@@ -626,12 +633,12 @@
         from user
         where user_id=#{userId}
         order by create_time desc
-        limit 1
+            limit 1
     </select>
 
     <delete id="deleteEarlierUser" parameterType="String">
         delete from user where id=(select a.id from (select id from user
-        where user_id=#{id} order by create_time limit 1) a)
+                                                     where user_id=#{id} order by create_time limit 1) a)
     </delete>
 
     <select id="getUserNumber" parameterType="String" resultType="Long">
@@ -697,6 +704,7 @@
             <if test="resultsOrPatents != null">results_or_patents,</if>
             <if test="honorsOrTitles != null">honors_or_titles,</if>
             <if test="resumeSite != null">resume_site,</if>
+            <if test="expertRegister != null">expert_register,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="status != null">status,</if>
@@ -765,6 +773,7 @@
             <if test="resultsOrPatents != null">#{resultsOrPatents},</if>
             <if test="honorsOrTitles != null">#{honorsOrTitles},</if>
             <if test="resumeSite != null">#{resumeSite},</if>
+            <if test="expertRegister != null">#{expertRegister},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="status != null">#{status},</if>
@@ -837,6 +846,7 @@
             <if test="resultsOrPatents != null">results_or_patents = #{resultsOrPatents},</if>
             <if test="honorsOrTitles != null">honors_or_titles = #{honorsOrTitles},</if>
             <if test="resumeSite != null">resume_site = #{resumeSite},</if>
+            <if test="expertRegister != null">expert_register = #{expertRegister},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="status != null">status = #{status},</if>
@@ -931,80 +941,80 @@
 
     <select id="statisticsList" resultType="Map">
         select
-        (select count(1) from (select count(1) from user where 1=1 and status in (2) and examine_status=0 and is_remove=0 group by user_id) a) sumPeople,
-        (select count(1) from (select count(1)  from user group by company_name) a) sunCompany,
-        (select count(1) from sys_user where dept_id=102) sumRegistered
+            (select count(1) from (select count(1) from user where 1=1 and status in (2) and examine_status=0 and is_remove=0 group by user_id) a) sumPeople,
+            (select count(1) from (select count(1)  from user group by company_name) a) sunCompany,
+            (select count(1) from sys_user where dept_id=102) sumRegistered
         from dual;
     </select>
 
     <select id="distributionList" resultType="distributionVo">
         SELECT
-        '人才专家' AS type,
-        SUM(CASE WHEN dwell_region = 1 THEN 1 ELSE 0 END) AS 'ft',
-        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
-        SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
-        SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
-        SUM(CASE WHEN dwell_region = 6 THEN 1 ELSE 0 END) AS 'lg',
-        SUM(CASE WHEN dwell_region = 7 THEN 1 ELSE 0 END) AS 'dp',
-        SUM(CASE WHEN dwell_region = 8 THEN 1 ELSE 0 END) AS 'yt',
-        SUM(CASE WHEN dwell_region = 9 THEN 1 ELSE 0 END) AS 'ps',
-        SUM(CASE WHEN dwell_region = 10 THEN 1 ELSE 0 END) AS 'gm',
-        SUM(CASE WHEN dwell_region = 11 THEN 1 ELSE 0 END) AS 'ss',
-        SUM(CASE WHEN dwell_region = 12 THEN 1 ELSE 0 END) AS 'qt'
+            '人才专家' AS type,
+            SUM(CASE WHEN dwell_region = 1 THEN 1 ELSE 0 END) AS 'ft',
+                SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
+                SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
+                SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
+                SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
+                SUM(CASE WHEN dwell_region = 6 THEN 1 ELSE 0 END) AS 'lg',
+                SUM(CASE WHEN dwell_region = 7 THEN 1 ELSE 0 END) AS 'dp',
+                SUM(CASE WHEN dwell_region = 8 THEN 1 ELSE 0 END) AS 'yt',
+                SUM(CASE WHEN dwell_region = 9 THEN 1 ELSE 0 END) AS 'ps',
+                SUM(CASE WHEN dwell_region = 10 THEN 1 ELSE 0 END) AS 'gm',
+                SUM(CASE WHEN dwell_region = 11 THEN 1 ELSE 0 END) AS 'ss',
+                SUM(CASE WHEN dwell_region = 12 THEN 1 ELSE 0 END) AS 'qt'
         FROM user where status=2 and examine_status=0 and is_remove=0
         union
         SELECT
-        '企业' AS type,
-        SUM(CASE WHEN company_region = 1 THEN 1 ELSE 0 END) AS 'ft',
-        SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
-        SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
-        SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
-        SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
-        SUM(CASE WHEN company_region = 6 THEN 1 ELSE 0 END) AS 'lg',
-        SUM(CASE WHEN company_region = 7 THEN 1 ELSE 0 END) AS 'dp',
-        SUM(CASE WHEN company_region = 8 THEN 1 ELSE 0 END) AS 'yt',
-        SUM(CASE WHEN company_region = 9 THEN 1 ELSE 0 END) AS 'ps',
-        SUM(CASE WHEN company_region = 10 THEN 1 ELSE 0 END) AS 'gm',
-        SUM(CASE WHEN company_region = 11 THEN 1 ELSE 0 END) AS 'ss',
-        SUM(CASE WHEN company_region = 12 THEN 1 ELSE 0 END) AS 'qt'
+            '企业' AS type,
+            SUM(CASE WHEN company_region = 1 THEN 1 ELSE 0 END) AS 'ft',
+                SUM(CASE WHEN dwell_region = 2 THEN 1 ELSE 0 END) AS 'lhu',
+                SUM(CASE WHEN dwell_region = 3 THEN 1 ELSE 0 END) AS 'ns',
+                SUM(CASE WHEN dwell_region = 4 THEN 1 ELSE 0 END) AS 'ba',
+                SUM(CASE WHEN dwell_region = 5 THEN 1 ELSE 0 END) AS 'lhua',
+                SUM(CASE WHEN company_region = 6 THEN 1 ELSE 0 END) AS 'lg',
+                SUM(CASE WHEN company_region = 7 THEN 1 ELSE 0 END) AS 'dp',
+                SUM(CASE WHEN company_region = 8 THEN 1 ELSE 0 END) AS 'yt',
+                SUM(CASE WHEN company_region = 9 THEN 1 ELSE 0 END) AS 'ps',
+                SUM(CASE WHEN company_region = 10 THEN 1 ELSE 0 END) AS 'gm',
+                SUM(CASE WHEN company_region = 11 THEN 1 ELSE 0 END) AS 'ss',
+                SUM(CASE WHEN company_region = 12 THEN 1 ELSE 0 END) AS 'qt'
         FROM user where status=2 and examine_status=0 and is_remove=0
     </select>
 
     <select id="sexMap" resultType="Map">
         select
-        SUM(CASE WHEN user_sex=0 THEN 1 ELSE 0 END) AS man,
-        SUM(CASE WHEN user_sex=1 THEN 1 ELSE 0 END) AS women
+            SUM(CASE WHEN user_sex=0 THEN 1 ELSE 0 END) AS man,
+            SUM(CASE WHEN user_sex=1 THEN 1 ELSE 0 END) AS women
         from user
         where status=2 and examine_status=0 and is_remove=0;
     </select>
 
     <select id="ageMap" resultType="Map">
         select
-        SUM(CASE WHEN age &lt;30 THEN 1 ELSE 0 END) AS '1',
-        SUM(CASE WHEN age>=30 and age &lt;40 THEN 1 ELSE 0 END) AS '2',
-        SUM(CASE WHEN age>=40 and age &lt;50 THEN 1 ELSE 0 END) AS '3',
-        SUM(CASE WHEN age>=50 and age &lt;65 THEN 1 ELSE 0 END) AS '4',
-        SUM(CASE WHEN age>=65 THEN 1 ELSE 0 END) AS '5'
+            SUM(CASE WHEN age &lt;30 THEN 1 ELSE 0 END) AS '1',
+                SUM(CASE WHEN age>=30 and age &lt;40 THEN 1 ELSE 0 END) AS '2',
+                SUM(CASE WHEN age>=40 and age &lt;50 THEN 1 ELSE 0 END) AS '3',
+                SUM(CASE WHEN age>=50 and age &lt;65 THEN 1 ELSE 0 END) AS '4',
+                SUM(CASE WHEN age>=65 THEN 1 ELSE 0 END) AS '5'
         from user
         where status=2 and examine_status=0 and is_remove=0;
     </select>
 
     <select id="specialityMap" resultType="Map">
         select
-        SUM(CASE WHEN specialty_type =1 THEN 1 ELSE 0 END) AS 'professional',
-        SUM(CASE WHEN specialty_type =2 THEN 1 ELSE 0 END) AS 'hr'
+            SUM(CASE WHEN specialty_type =1 THEN 1 ELSE 0 END) AS 'professional',
+                SUM(CASE WHEN specialty_type =2 THEN 1 ELSE 0 END) AS 'hr'
         from user
         where status=2 and examine_status=0 and is_remove=0
     </select>
 
     <select id="educationMap" resultType="Map">
         select
-        SUM(CASE WHEN highest_education =1 THEN 1 ELSE 0 END) AS 'doctor',
-        SUM(CASE WHEN highest_education =2 THEN 1 ELSE 0 END) AS 'master',
-        SUM(CASE WHEN highest_education =3 THEN 1 ELSE 0 END) AS 'college',
-        SUM(CASE WHEN highest_education =4 THEN 1 ELSE 0 END) AS 'junior',
-        SUM(CASE WHEN highest_education =5 THEN 1 ELSE 0 END) AS 'else'
+            SUM(CASE WHEN highest_education =1 THEN 1 ELSE 0 END) AS 'doctor',
+                SUM(CASE WHEN highest_education =2 THEN 1 ELSE 0 END) AS 'master',
+                SUM(CASE WHEN highest_education =3 THEN 1 ELSE 0 END) AS 'college',
+                SUM(CASE WHEN highest_education =4 THEN 1 ELSE 0 END) AS 'junior',
+                SUM(CASE WHEN highest_education =5 THEN 1 ELSE 0 END) AS 'else'
         from user
         where status=2 and examine_status=0 and is_remove=0;
     </select>
@@ -1012,24 +1022,24 @@
     <select id="trendMonth" resultType="Map">
         select t1.xc time,ifnull(t2.peopleSum,0) peopleSum,ifnull(t2.companySum,0) companySum
         from
-        (SELECT @xi:=@xi+1 as xc from
-        (SELECT 1 UNION SELECT 2 ) xc1,
-        (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 ) xc2,
-        (SELECT @xi:=0) xc0) t1
-        left join
-        (select month(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
-        from user
-        where status=2 and examine_status=0 and is_remove=0
-        group by month(create_time)) t2
+            (SELECT @xi:=@xi+1 as xc from
+            (SELECT 1 UNION SELECT 2 ) xc1,
+            (SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 ) xc2,
+            (SELECT @xi:=0) xc0) t1
+            left join
+            (select month(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
+            from user
+            where status=2 and examine_status=0 and is_remove=0
+            group by month(create_time)) t2
         on t1.xc=t2.time
     </select>
 
     <select id="trendYear" resultType="Map">
         select *
         from (select year(create_time) time,count(1) peopleSum,count(DISTINCT company_name) companySum
-        from user
-        where status=2 and examine_status=0 and is_remove=0
-        group by year(create_time))a
+              from user
+              where status=2 and examine_status=0 and is_remove=0
+              group by year(create_time))a
     </select>
 
     <select id="companyType" resultType="Map">
@@ -1049,22 +1059,22 @@
 
     <select id="companyRegion" resultType="Map">
         select h1.dict_value dictValue,ifnull(h2.number,0) number from
-          (select * from multistage_dictionary where parent_id=2) h1
-          left join
-          (select u2.mId,u2.dictValue,count(1) number from
-          (select * from user where 1=1
-          <if test="type != null and type !=''"> and company_region = #{type}</if>
-          ) u1,(select t1.id mId,t1.dict_value dictValue,t3.* from
-          (select * from multistage_dictionary where parent_id in
-          (select id from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2))) t3
-          left join
-          (select * from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2)) t2
-          on t3.parent_id=t2.id
-          left join
-          (select * from multistage_dictionary where parent_id=2) t1
-          on t2.parent_id=t1.id) u2
-          where u1.main_industry=u2.id
-          group by u2.mId,u2.dictValue) h2
-          on h1.dict_value=h2.dictValue
+        (select * from multistage_dictionary where parent_id=2) h1
+        left join
+        (select u2.mId,u2.dictValue,count(1) number from
+        (select * from user where 1=1
+        <if test="type != null and type !=''"> and company_region = #{type}</if>
+        ) u1,(select t1.id mId,t1.dict_value dictValue,t3.* from
+        (select * from multistage_dictionary where parent_id in
+        (select id from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2))) t3
+        left join
+        (select * from multistage_dictionary where parent_id in (select id from multistage_dictionary where parent_id=2)) t2
+        on t3.parent_id=t2.id
+        left join
+        (select * from multistage_dictionary where parent_id=2) t1
+        on t2.parent_id=t1.id) u2
+        where u1.main_industry=u2.id
+        group by u2.mId,u2.dictValue) h2
+        on h1.dict_value=h2.dictValue
     </select>
 </mapper>
